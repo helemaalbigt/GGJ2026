@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -224,6 +225,28 @@ public class PlayerMovement3D : MonoBehaviour
 		if (!enabled)
 		{
 			SetVelocityToZero();
+		}
+	}
+
+	public void MoveTo(Vector3 position)
+	{
+		StartCoroutine(MovePlayerStatic(position));
+	}
+	private IEnumerator MovePlayerStatic(Vector3 target)
+	{
+		var curPosition = transform.position;
+		var distance = Vector3.Distance(curPosition, target);
+		float travelTime = distance / _speed;
+		float travelledTime = 0;
+
+		var direction = (target - curPosition).normalized;
+		Lookat(direction, true, true);
+
+		while (travelledTime < travelTime)
+		{
+			travelledTime += Time.deltaTime / 3;
+			_rb.MovePosition(Vector3.Lerp(curPosition, target, travelledTime / travelTime));
+			yield return null;
 		}
 	}
 	#endregion

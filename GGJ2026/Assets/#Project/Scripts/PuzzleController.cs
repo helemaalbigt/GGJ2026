@@ -7,6 +7,7 @@ public class PuzzleController : MonoBehaviour
 	#region Editor Fields
 	[SerializeField] private int _levelIndex;
 	[SerializeField] private Collider _puzzleCompleteTrigger;
+	[SerializeField] private Vector3 _targetPositionOffset = new Vector3(-0.0086f, 0, 0);
 	[SerializeField] private Grabbable[] _grabbableObjects;
 	private Pose[] _startPoses;
 	#endregion
@@ -38,6 +39,11 @@ public class PuzzleController : MonoBehaviour
 		{
 			// player entered the trigger
 			OnPlayerEnteredTrigger();
+
+			if (other.TryGetComponent<PlayerMovement3D>(out var playerMovement))
+			{
+				playerMovement.MoveTo(transform.position + _targetPositionOffset);
+			}
 
 			// destroy the trigger to prevent multiple triggers
 			Destroy(_puzzleCompleteTrigger, Time.fixedDeltaTime);
@@ -78,10 +84,10 @@ public class PuzzleController : MonoBehaviour
 	}
 
 	public void ResetLevel()
-    {
-        LevelCompleted?.Invoke(this, _levelIndex);
+	{
+		LevelCompleted?.Invoke(this, _levelIndex);
 
-        for (int i = 0; i < _grabbableObjects.Length; i++)
+		for (int i = 0; i < _grabbableObjects.Length; i++)
 		{
 			var grabbableObject = _grabbableObjects[i];
 			var origPose = _startPoses[i];
