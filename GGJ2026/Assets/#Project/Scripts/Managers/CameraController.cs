@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 		// except for the one with level index 0
 		foreach (var levelCamera in _levelCameras)
 		{
-			if (levelCamera.LevelIndex == 0)
+			if (levelCamera.LevelIndex == -1)
 			{
 				levelCamera.Camera.gameObject.SetActive(true);
 				_currentCamera = levelCamera;

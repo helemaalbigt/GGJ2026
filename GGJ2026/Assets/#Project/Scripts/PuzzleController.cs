@@ -78,8 +78,10 @@ public class PuzzleController : MonoBehaviour
 	}
 
 	public void ResetLevel()
-	{
-		for (int i = 0; i < _grabbableObjects.Length; i++)
+    {
+        LevelCompleted?.Invoke(this, _levelIndex);
+
+        for (int i = 0; i < _grabbableObjects.Length; i++)
 		{
 			var grabbableObject = _grabbableObjects[i];
 			var origPose = _startPoses[i];
