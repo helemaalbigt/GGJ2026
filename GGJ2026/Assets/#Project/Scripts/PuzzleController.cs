@@ -8,6 +8,7 @@ public class PuzzleController : MonoBehaviour
 	[SerializeField] private int _levelIndex;
 	[SerializeField] private Collider _puzzleCompleteTrigger;
 	[SerializeField] private Grabbable[] _grabbableObjects;
+	private Pose[] _startPoses;
 	#endregion
 
 	#region Fields
@@ -19,6 +20,15 @@ public class PuzzleController : MonoBehaviour
 	#endregion
 
 	#region Mono
+
+	private void Start() {
+		_startPoses = new Pose[_grabbableObjects.Length];
+		for (int i = 0; i < _grabbableObjects.Length; i++) {
+			var grabbableObject = _grabbableObjects[i];
+			_startPoses[i] = new Pose(grabbableObject.transform.position, grabbableObject.transform.rotation);
+		}
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.isTrigger) return;
@@ -40,16 +50,30 @@ public class PuzzleController : MonoBehaviour
 	}
 	public void SetupLevel()
 	{
-
+		foreach (var grabbableObject in _grabbableObjects) {
+			grabbableObject.gameObject.SetActive(true);
+		}
 	}
+	
 	public void ResetLevel()
 	{
-
+		for (int i = 0; i < _grabbableObjects.Length; i++) {
+			var grabbableObject = _grabbableObjects[i];
+			var origPose = _startPoses[i];
+			//TODO: lerp this because its cool
+			grabbableObject.transform.position = origPose.position;
+			grabbableObject.transform.rotation = origPose.rotation;
+		}
 	}
+	
 	public void FreezeLevel()
 	{
-
+		for (int i = 0; i < _grabbableObjects.Length; i++) {
+			var grabbableObject = _grabbableObjects[i];
+			Destroy(grabbableObject);
+		}
 	}
+	
 	#endregion
 }
 

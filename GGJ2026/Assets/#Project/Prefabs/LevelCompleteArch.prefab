@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1445468064030742989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6931512467491286549}
+  m_Layer: 0
+  m_Name: DynamicBlocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6931512467491286549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445468064030742989}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9169629318770598448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1507709818240802370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2299872792510575322}
+  m_Layer: 0
+  m_Name: StaticBlocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2299872792510575322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507709818240802370}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9169629318770598448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5480967634268779826
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleController
   _levelIndex: 0
   _puzzleCompleteTrigger: {fileID: 1748770332627479562}
+  _grabbableObjects: []
 --- !u!65 &1748770332627479562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,6 +189,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6837408079008867305, guid: ef5e43fddec0ff24fbff8911dd4f51ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4330058170758681708}
+    - targetCorrespondingSourceObject: {fileID: 6837408079008867305, guid: ef5e43fddec0ff24fbff8911dd4f51ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2299872792510575322}
+    - targetCorrespondingSourceObject: {fileID: 6837408079008867305, guid: ef5e43fddec0ff24fbff8911dd4f51ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6931512467491286549}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef5e43fddec0ff24fbff8911dd4f51ce, type: 3}
 --- !u!4 &9169629318770598448 stripped
