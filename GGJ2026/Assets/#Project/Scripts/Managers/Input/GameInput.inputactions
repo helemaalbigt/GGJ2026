@@ -14,6 +14,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShiftMovementPlane",
+                    "type": "Button",
+                    "id": "df6641ff-29c1-47c2-ae6c-4bdd6e2f6a66",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -137,6 +146,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f85258aa-fe96-4826-871b-9b40a73b2a39",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShiftMovementPlane",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

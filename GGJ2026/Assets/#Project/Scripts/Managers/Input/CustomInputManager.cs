@@ -8,6 +8,7 @@ public class CustomInputManager
 	public enum Player
 	{
 		Move,
+		ShiftMovementPlane,
 	}
 	public enum InputType
 	{
@@ -74,6 +75,7 @@ public class CustomInputManager
 	{
 		// Player Map
 		_playerInputActions.Add(_inputSystem.Player.Move);
+		_playerInputActions.Add(_inputSystem.Player.ShiftMovementPlane);
 	}
 
 	private InputAction GetAction(Player inputType)

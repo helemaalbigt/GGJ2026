@@ -49,6 +49,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildSystem
   cursor: {fileID: 7967189840362356392}
   movementPlane: {fileID: 1473378807494767797}
+  grabbableMask:
+    serializedVersion: 2
+    m_Bits: 257
+  mouseMoveMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _hoveredBlock: {fileID: 0}
+  _grabbedBlock: {fileID: 0}
 --- !u!1 &1908880109535267644
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +68,7 @@ GameObject:
   - component: {fileID: 1473378807494767797}
   - component: {fileID: 8032412459941911339}
   - component: {fileID: 2541826951692705572}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MouseMovementPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
