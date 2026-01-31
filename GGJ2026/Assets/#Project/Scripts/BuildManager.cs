@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class BuildSystem : MonoBehaviour
+public class BuildManager : MonoBehaviour
 {
     public Transform cursor;
     public Transform movementPlane;
@@ -15,8 +15,10 @@ public class BuildSystem : MonoBehaviour
     private Grabbable _hoveredBlock;
     [SerializeField]
     private Grabbable _grabbedBlock;
+    [SerializeField]
+    private Transform _debugGrabbedCenterTarget;
 
-    private Vector3 _grabbedCenterTarget;
+    private Vector3 _grabbedCenterTargetPos;
     
     private Vector2 _mousePos;
     
@@ -60,6 +62,8 @@ public class BuildSystem : MonoBehaviour
         DoHoverCheck();
         DoGrabCheck();
         DoMovement();
+
+        _debugGrabbedCenterTarget.position = _grabbedCenterTargetPos;
     }
 
     private void DoHoverCheck() {
@@ -96,7 +100,7 @@ public class BuildSystem : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame) {
             if (_hoveredBlock != null && _grabbedBlock == null) {
                 _grabbedBlock = _hoveredBlock;
-                _grabbedCenterTarget = _grabbedBlock.transform.position;
+                _grabbedCenterTargetPos = _grabbedBlock.transform.position;
                 _hitFrames = 0;
             }
         }
@@ -122,7 +126,9 @@ public class BuildSystem : MonoBehaviour
             // }
 
             if (_grabbedBlock != null && _hitFrames > 2) {
-                _grabbedBlock.transform.position += _movement;
+                _grabbedCenterTargetPos += _movement;
+                _grabbedBlock.rigidBody.linearVelocity = (_grabbedCenterTargetPos - _grabbedBlock.transform.position) * 15f;
+                //_grabbedBlock.transform.position += _movement;
             }
             
             _prevMovementHit = movementHit;

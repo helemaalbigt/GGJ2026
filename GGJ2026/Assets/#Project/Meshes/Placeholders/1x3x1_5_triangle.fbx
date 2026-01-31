@@ -9,10 +9,10 @@ FBXHeaderExtension:  {
 		Year: 2026
 		Month: 1
 		Day: 31
-		Hour: 9
-		Minute: 21
-		Second: 22
-		Millisecond: 217
+		Hour: 14
+		Minute: 52
+		Second: 46
+		Millisecond: 879
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.2"
 	OtherFlags:  {
@@ -31,8 +31,8 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "C:\Users\vanbo\AppData\Local\Temp\4956.tmp.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\vanbo\AppData\Local\Temp\4956.tmp.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "C:\Users\vanbo\AppData\Local\Temp\B3DC.tmp.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\vanbo\AppData\Local\Temp\B3DC.tmp.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", ""
 			P: "Original|ApplicationName", "KString", "", "", ""
@@ -78,7 +78,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2461865863296, "", "Scene" {
+	Document: 2459789963424, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -228,9 +228,9 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2461936565296, "Geometry::", "Mesh" {
+	Geometry: 2461936559888, "Geometry::", "Mesh" {
 		Vertices: *54 {
-			a: -15,0,-45,-15,0,45,-15,45,2.8421709430404e-14,-15,0,-45,-15,45,2.8421709430404e-14,15,45,2.1316282072803e-14,15,0,-45,-15,45,2.8421709430404e-14,-15,0,45,15,0,45,15,45,2.1316282072803e-14,15,0,45,15,0,-45,15,45,2.1316282072803e-14,-15,0,45,-15,0,-45,15,0,-45,15,0,45
+			a: -15,-22.5,-45,-15,-22.5,45,-15,22.5,1.4210854715202e-14,-15,-22.5,-45,-15,22.5,1.4210854715202e-14,15,22.5,7.105427357601e-15,15,-22.5,-45,-15,22.5,1.4210854715202e-14,-15,-22.5,45,15,-22.5,45,15,22.5,7.105427357601e-15,15,-22.5,45,15,-22.5,-45,15,22.5,7.105427357601e-15,-15,-22.5,45,-15,-22.5,-45,15,-22.5,-45,15,-22.5,45
 		} 
 		PolygonVertexIndex: *18 {
 			a: 0,1,-3,3,4,5,-7,7,8,9,-11,11,12,-14,14,15,16,-18
@@ -289,7 +289,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2461937107568, "Model::Model", "Null" {
+	Model: 2461937063568, "Model::Model", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -297,7 +297,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 2461937109568, "Model::Group1", "Null" {
+	Model: 2461937067568, "Model::Group1", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -305,7 +305,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 2461937097568, "Model::Mesh1", "Mesh" {
+	Model: 2461937079568, "Model::Mesh1", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -314,7 +314,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2461936648656, "Material::FrontColor", "" {
+	Material: 2461026110432, "Material::FrontColor", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -341,19 +341,19 @@ Objects:  {
 Connections:  {
 	
 	;Model::Model, Model::RootNode
-	C: "OO",2461937107568,0
+	C: "OO",2461937063568,0
 	
 	;Model::Group1, Model::Model
-	C: "OO",2461937109568,2461937107568
+	C: "OO",2461937067568,2461937063568
 	
 	;Model::Mesh1, Model::Group1
-	C: "OO",2461937097568,2461937109568
+	C: "OO",2461937079568,2461937067568
 	
 	;Geometry::, Model::Mesh1
-	C: "OO",2461936565296,2461937097568
+	C: "OO",2461936559888,2461937079568
 	
 	;Material::FrontColor, Model::Mesh1
-	C: "OO",2461936648656,2461937097568
+	C: "OO",2461026110432,2461937079568
 }
 ;Takes section
 ;----------------------------------------------------
