@@ -1701,14 +1701,19 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8393466234748961087, guid: 580384c7854c31d479c3e81f8b57723a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2059207522}
+      addedObject: {fileID: 2059207527}
   m_SourcePrefab: {fileID: 100100000, guid: 580384c7854c31d479c3e81f8b57723a, type: 3}
 --- !u!1 &2059207521 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8393466234748961087, guid: 580384c7854c31d479c3e81f8b57723a, type: 3}
   m_PrefabInstance: {fileID: 2059207520}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2059207522
+--- !u!4 &2059207523 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6699479520669106779, guid: 580384c7854c31d479c3e81f8b57723a, type: 3}
+  m_PrefabInstance: {fileID: 2059207520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2059207527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1722,15 +1727,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundColorPicker
   groundTexture: {fileID: 8400000, guid: a4624d636a3e80844917bb6b00c65c08, type: 2}
   brightnessTreshold: 0.45
+  sampleSize: 2
   enableLogging: 1
   surfaceColor: {r: 0, g: 0, b: 0, a: 0}
   brightness1: 0
   brightness2: 0
---- !u!4 &2059207523 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6699479520669106779, guid: 580384c7854c31d479c3e81f8b57723a, type: 3}
-  m_PrefabInstance: {fileID: 2059207520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2618305116654503761
 PrefabInstance:
   m_ObjectHideFlags: 0

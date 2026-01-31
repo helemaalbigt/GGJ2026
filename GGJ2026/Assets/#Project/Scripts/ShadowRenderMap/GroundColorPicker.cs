@@ -3,23 +3,17 @@ using UnityEngine;
 public class GroundColorPicker : MonoBehaviour
 {
     [SerializeField] private RenderTexture groundTexture;
-    [SerializeField] private float brightnessTreshold = 0.80f;
+    [SerializeField] private float brightnessTreshold = 0.45f;
+    [SerializeField] private int sampleSize = 2;
     [SerializeField] private bool enableLogging = false;
 
     // debug values in inspector
-    public Color surfaceColor;
-    public float brightness1; // http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color 
-    public float brightness2; // http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+    public float brightness; // http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color 
 
     void Update()
     {
-        Raycast();
-
-        // BRIGHTNESS APPROX
-        brightness1 = (surfaceColor.r + surfaceColor.r + surfaceColor.b + surfaceColor.g + surfaceColor.g + surfaceColor.g) / 6;
-
-        // BRIGHTNESS
-        brightness2 = Mathf.Sqrt((surfaceColor.r * surfaceColor.r * 0.2126f + surfaceColor.g * surfaceColor.g * 0.7152f + surfaceColor.b * surfaceColor.b * 0.0722f));
+        Color[] surfaceColors = pickGroundColors(this.sampleSize);
+        this.brightness = calculateAverageBrightness(surfaceColors);
     }
 
     void OnGUI()
@@ -28,12 +22,7 @@ public class GroundColorPicker : MonoBehaviour
         {
             GUILayout.BeginArea(new Rect(10f, 10f, Screen.width, Screen.height));
 
-            GUILayout.Label("R = " + string.Format("{0:0.00}", surfaceColor.r));
-            GUILayout.Label("G = " + string.Format("{0:0.00}", surfaceColor.g));
-            GUILayout.Label("B = " + string.Format("{0:0.00}", surfaceColor.b));
-
-            GUILayout.Label("Brightness Approx = " + string.Format("{0:0.00}", brightness1));
-            GUILayout.Label("Brightness = " + string.Format("{0:0.00}", brightness2));
+            GUILayout.Label("Brightness = " + string.Format("{0:0.00}", this.brightness));
 
             GUILayout.Label("In Shadow = " + (IsInShadow() ? "true" : "false"));
 
@@ -41,22 +30,37 @@ public class GroundColorPicker : MonoBehaviour
         }
     }
 
-    void Raycast()
+    private Color[] pickGroundColors(int sampleSize)
     {
+        // debug: show position
         if (this.enableLogging)
             Debug.DrawLine(this.transform.position + Vector3.up * 1f, this.transform.position + Vector3.down * 1f, Color.red);
 
         // convert render texture to texture2D (probably not optimal for performance, but ok for now)
         Texture2D groundMap = toTexture2D(groundTexture);
 
-        // get color at center of viewport
-        Color surfaceColor = groundMap.GetPixelBilinear(.5f, .5f);
 
-        // APPLY
-        this.surfaceColor = surfaceColor;
+        int width = Mathf.FloorToInt(groundMap.width / 2) - sampleSize;
+        int height = Mathf.FloorToInt(groundMap.height / 2) - sampleSize;
+
+        // get color at center of viewport (=player position as camera is centered on player)
+        Color[] surfaceColors = groundMap.GetPixels(width, height, sampleSize * 2, sampleSize * 2);
+
+        return surfaceColors;
     }
 
-    Texture2D toTexture2D(RenderTexture rTex)
+    private float calculateAverageBrightness(Color[] colors)
+    {
+        float totalBrightness = 0f;
+        foreach (Color col in colors)
+        {
+            float brightness = Mathf.Sqrt((col.r * col.r * 0.2126f + col.g * col.g * 0.7152f + col.b * col.b * 0.0722f));
+            totalBrightness += brightness;
+        }
+        return totalBrightness / colors.Length;
+    }
+
+    private Texture2D toTexture2D(RenderTexture rTex)
     {
         Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGB24, false);
         // ReadPixels looks at the active RenderTexture.
@@ -68,6 +72,6 @@ public class GroundColorPicker : MonoBehaviour
 
     public bool IsInShadow()
     {
-        return brightness2 < brightnessTreshold;
+        return this.brightness < this.brightnessTreshold;
     }
 }
