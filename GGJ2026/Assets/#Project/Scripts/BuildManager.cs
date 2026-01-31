@@ -187,11 +187,9 @@ public class BuildManager : MonoBehaviour
     
     private void UpdateGroundCursor() {
         if (_grabbedBlock != null) {
-            if (Physics.Raycast(_grabbedBlock.GetBottomPos(0.005f), Vector3.down, out RaycastHit hit, 1f, groundRefMask)) {
+            if (Physics.Raycast(_grabbedBlock.GetBottomPos(0.015f), Vector3.down, out RaycastHit hit, 1f, groundRefMask)) {
                 _groundCursor.gameObject.SetActive(true);
                 _dottedLine.gameObject.SetActive(true);
-                _dottedLineRenderer.material.SetTextureScale("_MainTex", new Vector2(1f, 1f / Vector3.Distance(hit.point, _grabbedBlock.transform.position)));
-                
                 _groundCursor.position = hit.point;
                 _dottedLine.position = hit.point;
                 _dottedLine.localScale = new Vector3(1, hit.distance, 1);
