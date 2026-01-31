@@ -84,7 +84,12 @@ public class GameController : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (_currentState == GameState.StartGame || _currentState == GameState.EndGame) return;
+		if (_currentState == GameState.EndGame)
+		{
+			// set the player state
+			SetPlayerState(PlayerState.Safe);
+			return;
+		}
 
 		if (_playerState != PlayerState.Dead)
 		{
