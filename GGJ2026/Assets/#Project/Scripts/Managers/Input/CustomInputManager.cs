@@ -9,6 +9,10 @@ public class CustomInputManager
 	{
 		Move,
 		ShiftMovementPlane,
+		RotateXYClockwise,
+		RotateXYCounterClockwise,
+		RotateZYClockwise,
+		RotateZYCounterClockwise,
 	}
 	public enum InputType
 	{
@@ -76,6 +80,10 @@ public class CustomInputManager
 		// Player Map
 		_playerInputActions.Add(_inputSystem.Player.Move);
 		_playerInputActions.Add(_inputSystem.Player.ShiftMovementPlane);
+		_playerInputActions.Add(_inputSystem.Player.RotateXYClockwise);
+		_playerInputActions.Add(_inputSystem.Player.RotateXYCounterClockwise);
+		_playerInputActions.Add(_inputSystem.Player.RotateZYClockWise);
+		_playerInputActions.Add(_inputSystem.Player.RotateZYCounterClockWise);
 	}
 
 	private InputAction GetAction(Player inputType)

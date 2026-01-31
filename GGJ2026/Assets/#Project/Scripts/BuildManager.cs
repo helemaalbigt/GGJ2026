@@ -9,16 +9,18 @@ public class BuildManager : MonoBehaviour
     public Transform movementPlane;
     public LayerMask grabbableMask;
     public LayerMask mouseMoveMask;
+    public LayerMask groundRefMask;
+    public Transform grid;
     
     [Header("DEBUG")]
     [SerializeField]
     private Grabbable _hoveredBlock;
     [SerializeField]
     private Grabbable _grabbedBlock;
-    [SerializeField]
-    private Transform _debugGrabbedCenterTarget;
+    [FormerlySerializedAs("_debugGrabbedCenterTarget")] [SerializeField]
+    private Transform _groundCursor;
 
-    private Vector3 _grabbedCenterTargetPos;
+    private Pose _grabbedCenterTargetPose;
     
     private Vector2 _mousePos;
     
@@ -36,23 +38,51 @@ public class BuildManager : MonoBehaviour
     private void OnEnable() {
         CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.ShiftMovementPlane, ShiftPlanePressed);
         CustomInputManager.SubscribeToCancelled(CustomInputManager.Player.ShiftMovementPlane, ShiftPlaneReleased);
+        
+        CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.RotateXYClockwise, RotateXYClockwisePressed);
+        CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.RotateXYCounterClockwise, RotateXYCounterClockwisePressed);
+        CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.RotateZYClockwise, RotateZYClockwisePressed);
+        CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.RotateZYCounterClockwise, RotateZYCounterClockwisePressed);
     }
     
     private void OnDisable() {
         CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.ShiftMovementPlane, ShiftPlanePressed);
         CustomInputManager.UnsubscribeFromCancelled(CustomInputManager.Player.ShiftMovementPlane, ShiftPlaneReleased);
+        
+        CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateXYClockwise, RotateXYClockwisePressed);
+        CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateXYCounterClockwise, RotateXYCounterClockwisePressed);
+        CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateZYClockwise, RotateZYClockwisePressed);
+        CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateZYCounterClockwise, RotateZYCounterClockwisePressed);
     }
 
     private void ShiftPlanePressed(InputAction.CallbackContext obj) {
         movementPlane.eulerAngles = new Vector3(0, 0, 0f);
         _hitFrames = 0;
         _moveVertically = false;
+        UpdateGridGuide();
     }
     
     private void ShiftPlaneReleased(InputAction.CallbackContext obj) {
         movementPlane.eulerAngles = new Vector3(0, 0, -90f);
         _hitFrames = 0;
         _moveVertically = true;
+        UpdateGridGuide();
+    }
+
+    private void RotateXYClockwisePressed(InputAction.CallbackContext obj) {
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(90f, 0, 0) * _grabbedCenterTargetPose.rotation;
+    }
+    
+    private void RotateXYCounterClockwisePressed(InputAction.CallbackContext obj) {
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(-90f, 0, 0) * _grabbedCenterTargetPose.rotation;
+    }
+    
+    private void RotateZYClockwisePressed(InputAction.CallbackContext obj) {
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, 90f) * _grabbedCenterTargetPose.rotation;
+    }
+    
+    private void RotateZYCounterClockwisePressed(InputAction.CallbackContext obj) {
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, -90f) * _grabbedCenterTargetPose.rotation;
     }
 
     void Update() {
@@ -63,7 +93,11 @@ public class BuildManager : MonoBehaviour
         DoGrabCheck();
         DoMovement();
 
-        _debugGrabbedCenterTarget.position = _grabbedCenterTargetPos;
+        _groundCursor.position = _grabbedCenterTargetPose.position;
+    }
+
+    private void LateUpdate() {
+        UpdateGroundCursor();
     }
 
     private void DoHoverCheck() {
@@ -100,8 +134,11 @@ public class BuildManager : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame) {
             if (_hoveredBlock != null && _grabbedBlock == null) {
                 _grabbedBlock = _hoveredBlock;
-                _grabbedCenterTargetPos = _grabbedBlock.transform.position;
+                _grabbedCenterTargetPose.position = _grabbedBlock.transform.position;
+                _grabbedCenterTargetPose.rotation = _grabbedBlock.transform.rotation;
                 _hitFrames = 0;
+
+                UpdateGridGuide();
             }
         }
 
@@ -110,6 +147,8 @@ public class BuildManager : MonoBehaviour
                 _hoveredBlock.SetHovered(false);
                 _hoveredBlock = null;
                 _grabbedBlock = null;
+
+                UpdateGridGuide();
             }
         }
     }
@@ -119,20 +158,39 @@ public class BuildManager : MonoBehaviour
         if (Physics.Raycast(ray, out _movementHit, 3f, mouseMoveMask)) {
             var movementHit = _movementHit.point;
             _movement = movementHit - _prevMovementHit;
-            // if (_moveVertically) {
-            //     _movement.z = 0;
-            // } else {
-            //     _movement.y = 0;
-            // }
 
             if (_grabbedBlock != null && _hitFrames > 2) {
-                _grabbedCenterTargetPos += _movement;
-                _grabbedBlock.rigidBody.linearVelocity = (_grabbedCenterTargetPos - _grabbedBlock.transform.position) * 15f;
-                //_grabbedBlock.transform.position += _movement;
+                _grabbedCenterTargetPose.position += _movement;
+
+                _grabbedBlock.rigidBody.linearVelocity = (_grabbedCenterTargetPose.position - _grabbedBlock.transform.position) * 15f;
+                _grabbedBlock.rigidBody.Move(_grabbedBlock.transform.position, _grabbedCenterTargetPose.rotation);
             }
             
             _prevMovementHit = movementHit;
             _hitFrames++;
+        }
+    }
+
+    private void UpdateGridGuide() {
+        grid.gameObject.SetActive(_grabbedBlock != null);
+        if (_grabbedBlock != null) {
+            grid.position = _grabbedBlock.transform.position;
+            grid.eulerAngles = _moveVertically ? new Vector3(0,-90f, -90f) : new Vector3(90f,0,0);
+        }
+    }
+    
+    private void UpdateGroundCursor() {
+        if (_grabbedBlock != null) {
+            if (Physics.Raycast(_grabbedBlock.transform.position, Vector3.down, out RaycastHit hit, 2f, groundRefMask)) {
+                _groundCursor.gameObject.SetActive(true);
+                _groundCursor.position = hit.point;
+            }
+            else {
+                _groundCursor.gameObject.SetActive(false);
+            }
+        }
+        else {
+            _groundCursor.gameObject.SetActive(false);
         }
     }
 }

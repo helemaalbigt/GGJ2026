@@ -23,6 +23,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RotateXYClockwise",
+                    "type": "Button",
+                    "id": "4a6e5d89-9e04-431b-b5b9-32accc6981d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateXYCounterClockwise",
+                    "type": "Button",
+                    "id": "2d18f375-dcc1-496f-b08a-246fcf07c97b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateZYClockWise",
+                    "type": "Button",
+                    "id": "adcf03da-5f55-4e02-8840-730346a3f899",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateZYCounterClockWise",
+                    "type": "Button",
+                    "id": "61ae76c8-7c03-4532-9578-b84c1597c167",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -155,6 +191,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShiftMovementPlane",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2900ff98-05d4-41b6-bad3-3a1d276ad1b0",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateXYClockwise",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12936daf-2984-417a-ad32-786bf39c3833",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateXYCounterClockwise",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8df72951-e16d-4bfb-a848-82e6d9b5a53d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateZYClockWise",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "810a94fd-958c-4722-99ee-3e5d15fb059c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateZYCounterClockWise",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

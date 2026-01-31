@@ -109,6 +109,42 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateXYClockwise"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a6e5d89-9e04-431b-b5b9-32accc6981d3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateXYCounterClockwise"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d18f375-dcc1-496f-b08a-246fcf07c97b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateZYClockWise"",
+                    ""type"": ""Button"",
+                    ""id"": ""adcf03da-5f55-4e02-8840-730346a3f899"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateZYCounterClockWise"",
+                    ""type"": ""Button"",
+                    ""id"": ""61ae76c8-7c03-4532-9578-b84c1597c167"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,6 +279,50 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""ShiftMovementPlane"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2900ff98-05d4-41b6-bad3-3a1d276ad1b0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateXYClockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12936daf-2984-417a-ad32-786bf39c3833"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateXYCounterClockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8df72951-e16d-4bfb-a848-82e6d9b5a53d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZYClockWise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""810a94fd-958c-4722-99ee-3e5d15fb059c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZYCounterClockWise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -253,6 +333,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_ShiftMovementPlane = m_Player.FindAction("ShiftMovementPlane", throwIfNotFound: true);
+        m_Player_RotateXYClockwise = m_Player.FindAction("RotateXYClockwise", throwIfNotFound: true);
+        m_Player_RotateXYCounterClockwise = m_Player.FindAction("RotateXYCounterClockwise", throwIfNotFound: true);
+        m_Player_RotateZYClockWise = m_Player.FindAction("RotateZYClockWise", throwIfNotFound: true);
+        m_Player_RotateZYCounterClockWise = m_Player.FindAction("RotateZYCounterClockWise", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -335,6 +419,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_ShiftMovementPlane;
+    private readonly InputAction m_Player_RotateXYClockwise;
+    private readonly InputAction m_Player_RotateXYCounterClockwise;
+    private readonly InputAction m_Player_RotateZYClockWise;
+    private readonly InputAction m_Player_RotateZYCounterClockWise;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -354,6 +442,22 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ShiftMovementPlane".
         /// </summary>
         public InputAction @ShiftMovementPlane => m_Wrapper.m_Player_ShiftMovementPlane;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RotateXYClockwise".
+        /// </summary>
+        public InputAction @RotateXYClockwise => m_Wrapper.m_Player_RotateXYClockwise;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RotateXYCounterClockwise".
+        /// </summary>
+        public InputAction @RotateXYCounterClockwise => m_Wrapper.m_Player_RotateXYCounterClockwise;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RotateZYClockWise".
+        /// </summary>
+        public InputAction @RotateZYClockWise => m_Wrapper.m_Player_RotateZYClockWise;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RotateZYCounterClockWise".
+        /// </summary>
+        public InputAction @RotateZYCounterClockWise => m_Wrapper.m_Player_RotateZYCounterClockWise;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -386,6 +490,18 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ShiftMovementPlane.started += instance.OnShiftMovementPlane;
             @ShiftMovementPlane.performed += instance.OnShiftMovementPlane;
             @ShiftMovementPlane.canceled += instance.OnShiftMovementPlane;
+            @RotateXYClockwise.started += instance.OnRotateXYClockwise;
+            @RotateXYClockwise.performed += instance.OnRotateXYClockwise;
+            @RotateXYClockwise.canceled += instance.OnRotateXYClockwise;
+            @RotateXYCounterClockwise.started += instance.OnRotateXYCounterClockwise;
+            @RotateXYCounterClockwise.performed += instance.OnRotateXYCounterClockwise;
+            @RotateXYCounterClockwise.canceled += instance.OnRotateXYCounterClockwise;
+            @RotateZYClockWise.started += instance.OnRotateZYClockWise;
+            @RotateZYClockWise.performed += instance.OnRotateZYClockWise;
+            @RotateZYClockWise.canceled += instance.OnRotateZYClockWise;
+            @RotateZYCounterClockWise.started += instance.OnRotateZYCounterClockWise;
+            @RotateZYCounterClockWise.performed += instance.OnRotateZYCounterClockWise;
+            @RotateZYCounterClockWise.canceled += instance.OnRotateZYCounterClockWise;
         }
 
         /// <summary>
@@ -403,6 +519,18 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ShiftMovementPlane.started -= instance.OnShiftMovementPlane;
             @ShiftMovementPlane.performed -= instance.OnShiftMovementPlane;
             @ShiftMovementPlane.canceled -= instance.OnShiftMovementPlane;
+            @RotateXYClockwise.started -= instance.OnRotateXYClockwise;
+            @RotateXYClockwise.performed -= instance.OnRotateXYClockwise;
+            @RotateXYClockwise.canceled -= instance.OnRotateXYClockwise;
+            @RotateXYCounterClockwise.started -= instance.OnRotateXYCounterClockwise;
+            @RotateXYCounterClockwise.performed -= instance.OnRotateXYCounterClockwise;
+            @RotateXYCounterClockwise.canceled -= instance.OnRotateXYCounterClockwise;
+            @RotateZYClockWise.started -= instance.OnRotateZYClockWise;
+            @RotateZYClockWise.performed -= instance.OnRotateZYClockWise;
+            @RotateZYClockWise.canceled -= instance.OnRotateZYClockWise;
+            @RotateZYCounterClockWise.started -= instance.OnRotateZYCounterClockWise;
+            @RotateZYCounterClockWise.performed -= instance.OnRotateZYCounterClockWise;
+            @RotateZYCounterClockWise.canceled -= instance.OnRotateZYCounterClockWise;
         }
 
         /// <summary>
@@ -457,5 +585,33 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShiftMovementPlane(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateXYClockwise" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateXYClockwise(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateXYCounterClockwise" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateXYCounterClockwise(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateZYClockWise" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateZYClockWise(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateZYCounterClockWise" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateZYCounterClockWise(InputAction.CallbackContext context);
     }
 }

@@ -19,7 +19,8 @@ public class GravityManager : MonoBehaviour {
         var grabbables = parent.GetComponentsInChildren<Grabbable>(true);
         foreach (var grabbable in grabbables) {
             grabbable.rigidBody.useGravity = gravityOn;
-            grabbable.rigidBody.linearDamping = gravityOn ? 1f : 100f;
+            grabbable.rigidBody.linearDamping = gravityOn ? 1f : 10f;
+            grabbable.rigidBody.angularDamping = gravityOn ? 0.1f : 10f;
             if (gravityOn) {
                 grabbable.rigidBody.constraints = RigidbodyConstraints.None;
             }

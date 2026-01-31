@@ -4,6 +4,7 @@ public class Grabbable : MonoBehaviour
 {
     public Rigidbody rigidBody;
     public GameObject mesh;
+    public Renderer renderer;
 
     public void SetHovered(bool hovered) {
         if (hovered) {
