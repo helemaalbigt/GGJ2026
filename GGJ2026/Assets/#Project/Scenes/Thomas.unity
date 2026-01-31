@@ -686,13 +686,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 6161284097091611314, guid: 4523f338aa60092468c50ef25606af11, type: 3}
-      propertyPath: grabbableMask.m_Bits
-      value: 65
+    - target: {fileID: 1473378807494767797, guid: 4523f338aa60092468c50ef25606af11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
       objectReference: {fileID: 0}
-    - target: {fileID: 6161284097091611314, guid: 4523f338aa60092468c50ef25606af11, type: 3}
-      propertyPath: mouseMoveMask.m_Bits
-      value: 128
+    - target: {fileID: 1473378807494767797, guid: 4523f338aa60092468c50ef25606af11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473378807494767797, guid: 4523f338aa60092468c50ef25606af11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473378807494767797, guid: 4523f338aa60092468c50ef25606af11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473378807494767797, guid: 4523f338aa60092468c50ef25606af11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7737407553039194459, guid: 4523f338aa60092468c50ef25606af11, type: 3}
       propertyPath: m_LocalPosition.x
