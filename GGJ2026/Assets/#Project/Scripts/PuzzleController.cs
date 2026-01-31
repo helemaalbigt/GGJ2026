@@ -6,6 +6,7 @@ public class PuzzleController : MonoBehaviour
 {
 	#region Editor Fields
 	[SerializeField] private int _levelIndex;
+	[SerializeField] private Collider _puzzleCompleteTrigger;
 	#endregion
 
 	#region Fields
@@ -24,8 +25,8 @@ public class PuzzleController : MonoBehaviour
 			// player entered the trigger
 			OnPlayerEnteredTrigger();
 
-			// destroy this object to prevent multiple triggers
-			Destroy(gameObject, Time.fixedDeltaTime);
+			// destroy the trigger to prevent multiple triggers
+			Destroy(_puzzleCompleteTrigger, Time.fixedDeltaTime);
 		}
 	}
 	#endregion
