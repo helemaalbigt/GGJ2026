@@ -7,6 +7,7 @@ public class PuzzleController : MonoBehaviour
 	#region Editor Fields
 	[SerializeField] private int _levelIndex;
 	[SerializeField] private Collider _puzzleCompleteTrigger;
+	[SerializeField] private Grabbable[] _grabbableObjects;
 	#endregion
 
 	#region Fields
@@ -36,6 +37,18 @@ public class PuzzleController : MonoBehaviour
 	private void OnPlayerEnteredTrigger()
 	{
 		LevelCompleted?.Invoke(this, _levelIndex);
+	}
+	public void SetupLevel()
+	{
+
+	}
+	public void ResetLevel()
+	{
+
+	}
+	public void FreezeLevel()
+	{
+
 	}
 	#endregion
 }
