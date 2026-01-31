@@ -145,6 +145,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4826919-47ff-44f6-8d0a-cea5473746dd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BeginLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""eba053b5-ac67-4863-8a43-929d9512e013"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -323,6 +341,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""RotateZYCounterClockWise"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f35e366-58c9-4da7-81a8-51582eb3f45a"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""305d7de3-7645-4ba8-9cf4-522150607825"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BeginLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -337,6 +377,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_RotateXYCounterClockwise = m_Player.FindAction("RotateXYCounterClockwise", throwIfNotFound: true);
         m_Player_RotateZYClockWise = m_Player.FindAction("RotateZYClockWise", throwIfNotFound: true);
         m_Player_RotateZYCounterClockWise = m_Player.FindAction("RotateZYCounterClockWise", throwIfNotFound: true);
+        m_Player_ResetLevel = m_Player.FindAction("ResetLevel", throwIfNotFound: true);
+        m_Player_BeginLevel = m_Player.FindAction("BeginLevel", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -423,6 +465,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateXYCounterClockwise;
     private readonly InputAction m_Player_RotateZYClockWise;
     private readonly InputAction m_Player_RotateZYCounterClockWise;
+    private readonly InputAction m_Player_ResetLevel;
+    private readonly InputAction m_Player_BeginLevel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -458,6 +502,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/RotateZYCounterClockWise".
         /// </summary>
         public InputAction @RotateZYCounterClockWise => m_Wrapper.m_Player_RotateZYCounterClockWise;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ResetLevel".
+        /// </summary>
+        public InputAction @ResetLevel => m_Wrapper.m_Player_ResetLevel;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/BeginLevel".
+        /// </summary>
+        public InputAction @BeginLevel => m_Wrapper.m_Player_BeginLevel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -502,6 +554,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @RotateZYCounterClockWise.started += instance.OnRotateZYCounterClockWise;
             @RotateZYCounterClockWise.performed += instance.OnRotateZYCounterClockWise;
             @RotateZYCounterClockWise.canceled += instance.OnRotateZYCounterClockWise;
+            @ResetLevel.started += instance.OnResetLevel;
+            @ResetLevel.performed += instance.OnResetLevel;
+            @ResetLevel.canceled += instance.OnResetLevel;
+            @BeginLevel.started += instance.OnBeginLevel;
+            @BeginLevel.performed += instance.OnBeginLevel;
+            @BeginLevel.canceled += instance.OnBeginLevel;
         }
 
         /// <summary>
@@ -531,6 +589,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @RotateZYCounterClockWise.started -= instance.OnRotateZYCounterClockWise;
             @RotateZYCounterClockWise.performed -= instance.OnRotateZYCounterClockWise;
             @RotateZYCounterClockWise.canceled -= instance.OnRotateZYCounterClockWise;
+            @ResetLevel.started -= instance.OnResetLevel;
+            @ResetLevel.performed -= instance.OnResetLevel;
+            @ResetLevel.canceled -= instance.OnResetLevel;
+            @BeginLevel.started -= instance.OnBeginLevel;
+            @BeginLevel.performed -= instance.OnBeginLevel;
+            @BeginLevel.canceled -= instance.OnBeginLevel;
         }
 
         /// <summary>
@@ -613,5 +677,19 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRotateZYCounterClockWise(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ResetLevel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnResetLevel(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BeginLevel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBeginLevel(InputAction.CallbackContext context);
     }
 }

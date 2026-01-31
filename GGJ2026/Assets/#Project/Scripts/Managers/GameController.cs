@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
@@ -72,13 +73,19 @@ public class GameController : MonoBehaviour
 	private void OnEnable()
 	{
 		PuzzleController.LevelCompleted += OnPuzzleCompleted;
+
+		CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.BeginLevel, BeginLevel);
+		CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.ResetLevel, ResetLevel);
 	}
+
 	private void OnDisable()
 	{
 		PuzzleController.LevelCompleted -= OnPuzzleCompleted;
 	}
 	private void Update()
 	{
+		if (_currentState == GameState.StartGame || _currentState == GameState.EndGame) return;
+
 		if (_playerState != PlayerState.Dead)
 		{
 			SetPlayerState(_shadowCheck.IsInShadow() ? PlayerState.Safe : PlayerState.Burning);
@@ -136,10 +143,10 @@ public class GameController : MonoBehaviour
 
 	public void RestartLevel()
 	{
-		var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex - 1, 0, _levels.Count);
+		var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex, 0, _levels.Count);
 		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
 		// reset the level
-		//currentLevel.ResetPuzzle();
+		currentLevel.ResetLevel();
 
 		// set the player position to the level position again
 		_shadowCheck.transform.position = currentLevel.transform.position;
@@ -154,13 +161,40 @@ public class GameController : MonoBehaviour
 		// set the playerState to safe
 		SetPlayerState(PlayerState.Safe);
 	}
+
+	private void ResetLevel(InputAction.CallbackContext context)
+	{
+		RestartLevel();
+	}
+
+	private void BeginLevel(InputAction.CallbackContext context)
+	{
+		//only continue if we're in building state
+		if (_currentState != GameState.Building) return;
+
+		SetGameState(GameState.Movement);
+
+		var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex, 0, _levels.Count);
+		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
+		currentLevel.StartLevel();
+	}
+
 	private void OnPuzzleCompleted(object sender, int levelIndex)
 	{
 		// failsafe
 		if (sender is not PuzzleController) return;
 
+		// freeze the current level 
+		var clampedCurrentLevelIndex = Mathf.Clamp(levelIndex - 1, 0, _levels.Count);
+		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
+		currentLevel.FreezeLevel();
+
 		// set the current level index 
 		_lastCompletedLevelIndex = levelIndex;
+
+		var clampedNextLevelIndex = Mathf.Clamp(levelIndex, 0, _levels.Count);
+		var nextLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedNextLevelIndex).FirstOrDefault();
+		nextLevel.SetupLevel();
 
 		if (DEBUG_DONT_SWITCH_STATE) return;
 		// update the game state to the building state

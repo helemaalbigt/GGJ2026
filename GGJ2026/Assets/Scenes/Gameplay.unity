@@ -1038,6 +1038,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CylinderBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 2547140357691091081, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9130522735064987500, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1110,6 +1114,10 @@ PrefabInstance:
     - target: {fileID: 144665361355169105, guid: 57e2ad39588e9134c8d1b696c3e73be6, type: 3}
       propertyPath: m_Name
       value: FlatBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 144665361355169105, guid: 57e2ad39588e9134c8d1b696c3e73be6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3443101661316487393, guid: 57e2ad39588e9134c8d1b696c3e73be6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1614,7 +1622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4215190641244870294, guid: f9e0561d9edc25a4bb2ad824c62a84cf, type: 3}
       propertyPath: _levelIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9169629318770598448, guid: f9e0561d9edc25a4bb2ad824c62a84cf, type: 3}
       propertyPath: m_LocalPosition.x
