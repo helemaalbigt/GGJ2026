@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleController
   _levelIndex: 0
+  _puzzleCompleteTrigger: {fileID: 1748770332627479562}
 --- !u!65 &1748770332627479562
 BoxCollider:
   m_ObjectHideFlags: 0
