@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour
 
 	#region Event
 	public static event EventHandler<PlayerState> PlayerStateChanged;
+	public static event EventHandler<GameState> GameStateChanged;
 	// send a value from 0 to 1 of the burntime/maxburntime
 	// 0 is no burn at all
 	// 1 is fully burned up
@@ -84,8 +85,7 @@ public class GameController : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (_currentState == GameState.EndGame)
-		{
+		if (_currentState == GameState.EndGame) {
 			// set the player state
 			SetPlayerState(PlayerState.Safe);
 			return;
@@ -229,6 +229,8 @@ public class GameController : MonoBehaviour
 				EnteredEndGameState?.Invoke();
 				break;
 		}
+		
+		GameStateChanged?.Invoke(this, state);
 	}
 
 	private void PlayerDeath()

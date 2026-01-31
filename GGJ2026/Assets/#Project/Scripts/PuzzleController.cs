@@ -9,6 +9,7 @@ public class PuzzleController : MonoBehaviour
 	[SerializeField] private Collider _puzzleCompleteTrigger;
 	[SerializeField] private Vector3 _targetPositionOffset = new Vector3(-0.0086f, 0, 0);
 	[SerializeField] private Grabbable[] _grabbableObjects;
+	[SerializeField] private GameObject[] _enableWhenActive;
 	private Pose[] _startPoses;
 	#endregion
 
@@ -64,6 +65,10 @@ public class PuzzleController : MonoBehaviour
 		}
 
 		SetAllChildBlocksGravity(false);
+
+		foreach (var enableWhenActive in _enableWhenActive) {
+			enableWhenActive.SetActive(true);
+		}
 	}
 	public void SetAllChildBlocksGravity(bool gravityOn)
 	{
@@ -106,6 +111,10 @@ public class PuzzleController : MonoBehaviour
 			//Destroy(grabbableObject);
 		}
 		SetAllChildBlocksGravity(false);
+		
+		foreach (var enableWhenActive in _enableWhenActive) {
+			enableWhenActive.SetActive(false);
+		}
 	}
 
 	internal void StartLevel()
