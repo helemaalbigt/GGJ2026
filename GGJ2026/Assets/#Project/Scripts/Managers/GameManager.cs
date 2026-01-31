@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
         if(Keyboard.current.sKey.wasPressedThisFrame)
         {
-            Instantiate(blockPrefab, new Vector3(2, 0, -10), Quaternion.identity);
+            Instantiate(blockPrefab, new Vector3(-2, 0, -10), Quaternion.identity);
         }
     }
 }
