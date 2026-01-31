@@ -14,6 +14,7 @@ public class PuzzleController : MonoBehaviour
 
 	#region Properties
 	public static event EventHandler<int> LevelCompleted;
+	public int LevelIndex => _levelIndex;
 	#endregion
 
 	#region Mono

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +10,16 @@ public class GameController : MonoBehaviour
 	public enum GameState
 	{
 		Movement,
-		Building
+		Building,
+		GameOver,
+		StartGame,
+		EndGame,
+	}
+	public enum PlayerState
+	{
+		Burning,
+		Safe,
+		Dead,
 	}
 	#endregion
 
@@ -15,20 +27,47 @@ public class GameController : MonoBehaviour
 	[SerializeField] private bool DEBUG_DONT_SWITCH_STATE = false;
 	[SerializeField] private GameState _startingState;
 
+	[Header("PlayerHealth")]
+	[SerializeField] private GroundColorPicker _shadowCheck;
+	[SerializeField] private float _maxBurnTime;
+	[SerializeField] private float _burnRate;
+	[SerializeField] private float _healRate;
+
+	[Header("Reset Level")]
+	[SerializeField] private float _respawnTime;
+
 	[Header("Events")]
 	[SerializeField] private UnityEvent EnteredMovementState;
 	[SerializeField] private UnityEvent EnteredBuildingState;
+	[SerializeField] private UnityEvent EnteredGameOverState;
+	[SerializeField] private UnityEvent EnteredStartGameState;
+	[SerializeField] private UnityEvent EnteredEndGameState;
 	#endregion
 
-	#region Field
+	#region Fields
 	private GameState _currentState;
-	private int _currentLevelIndex = -1;
+	private PlayerState _playerState;
+	private int _lastCompletedLevelIndex = -1;
+	private List<PuzzleController> _levels = new();
+
+	private float _previousBurnTime;
+	private float _burnTime;
+	private float _respawnTimer;
+	#endregion
+
+	#region Event
+	public static event EventHandler<PlayerState> PlayerStateChanged;
+	// send a value from 0 to 1 of the burntime/maxburntime
+	// 0 is no burn at all
+	// 1 is fully burned up
+	public static event EventHandler<float> BurnTimeUpdated;
 	#endregion
 
 	#region Mono
 	private void Awake()
 	{
 		SetGameState(_startingState);
+		_levels = FindObjectsByType<PuzzleController>(FindObjectsSortMode.None).ToList();
 	}
 	private void OnEnable()
 	{
@@ -38,13 +77,90 @@ public class GameController : MonoBehaviour
 	{
 		PuzzleController.LevelCompleted -= OnPuzzleCompleted;
 	}
+	private void Update()
+	{
+		if (_playerState != PlayerState.Dead)
+		{
+			SetPlayerState(_shadowCheck.IsInShadow() ? PlayerState.Safe : PlayerState.Burning);
+
+			switch (_playerState)
+			{
+				case PlayerState.Burning:
+					_burnTime += _burnRate * Time.deltaTime;
+
+					if (_burnTime > _maxBurnTime)
+					{
+						PlayerDeath();
+					}
+
+					break;
+				case PlayerState.Safe:
+					if (_burnTime > 0)
+						_burnTime -= _healRate * Time.deltaTime;
+					break;
+			}
+
+			_burnTime = Mathf.Clamp(_burnTime, 0, _maxBurnTime);
+
+			if (_previousBurnTime != _burnTime)
+			{
+				BurnTimeUpdated?.Invoke(this, _burnTime / _maxBurnTime);
+			}
+			_previousBurnTime = _burnTime;
+		}
+
+		// player is dead
+		else
+		{
+			_respawnTimer += Time.deltaTime;
+
+			if (_respawnTimer > _respawnTime)
+			{
+				RestartLevel();
+			}
+		}
+	}
+
 	#endregion
 
 	#region Methods
-	private void OnPuzzleCompleted(object sender, int e)
+	private void SetPlayerState(PlayerState playerState)
 	{
+		// prevent duplicate
+		if (_playerState == playerState) return;
+
+		_playerState = playerState;
+
+		PlayerStateChanged?.Invoke(this, playerState);
+	}
+
+	public void RestartLevel()
+	{
+		var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex - 1, 0, _levels.Count);
+		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
+		// reset the level
+		//currentLevel.ResetPuzzle();
+
+		// set the player position to the level position again
+		_shadowCheck.transform.position = currentLevel.transform.position;
+
+		//enter the build state
+		SetGameState(GameState.Building);
+
+		// reset the respawn timer and the burn time
+		_respawnTimer = 0;
+		_burnTime = 0;
+
+		// set the playerState to safe
+		SetPlayerState(PlayerState.Safe);
+	}
+	private void OnPuzzleCompleted(object sender, int levelIndex)
+	{
+		// failsafe
+		if (sender is not PuzzleController) return;
+
 		// set the current level index 
-		_currentLevelIndex = e;
+		_lastCompletedLevelIndex = levelIndex;
 
 		if (DEBUG_DONT_SWITCH_STATE) return;
 		// update the game state to the building state
@@ -64,7 +180,23 @@ public class GameController : MonoBehaviour
 			case GameState.Building:
 				EnteredBuildingState?.Invoke();
 				break;
+			case GameState.GameOver:
+				EnteredGameOverState?.Invoke();
+				break;
+			case GameState.StartGame:
+				EnteredStartGameState?.Invoke();
+				break;
+			case GameState.EndGame:
+				EnteredEndGameState?.Invoke();
+				break;
 		}
+	}
+
+	private void PlayerDeath()
+	{
+		SetPlayerState(PlayerState.Dead);
+		// enable the gameOver state
+		SetGameState(GameState.GameOver);
 	}
 
 	[ContextMenu("Toggle GameState")]

@@ -44,10 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4b7afb3225667499698546a006b8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  DEBUG_DONT_SWITCH_STATE: 0
   _startingState: 0
+  _shadowCheck: {fileID: 0}
+  _maxBurnTime: 0
+  _burnRate: 0
+  _healRate: 0
+  _respawnTime: 0
   EnteredMovementState:
     m_PersistentCalls:
       m_Calls: []
   EnteredBuildingState:
+    m_PersistentCalls:
+      m_Calls: []
+  EnteredGameOverState:
     m_PersistentCalls:
       m_Calls: []
