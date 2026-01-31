@@ -20,6 +20,7 @@ public class PlayerMovement3D : MonoBehaviour
 	[Header("Grounded Checks")]
 	[SerializeField] private float _groundedCheckUpOffset;
 	[SerializeField] private float _groundedCheckRadius;
+	[SerializeField] private LayerMask _groundedLayerMask;
 	#endregion
 
 	#region Fields
@@ -137,7 +138,7 @@ public class PlayerMovement3D : MonoBehaviour
 	private void CalculateIsGrounded(Vector3 raycastPos)
 	{
 		// does the raycast to see if the player is grounded or not, if something on the layers got hit then the players is grounded
-		if (Physics.CheckSphere(raycastPos, _groundedCheckRadius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+		if (Physics.CheckSphere(raycastPos, _groundedCheckRadius, _groundedLayerMask, QueryTriggerInteraction.Ignore))
 		{
 			IsGrounded = true;
 			return;
@@ -168,7 +169,7 @@ public class PlayerMovement3D : MonoBehaviour
 			}
 		}
 
-		_rb.AddForce(moveVector, ForceMode.Acceleration);
+		AddForce(moveVector, ForceMode.Acceleration);
 	}
 
 
@@ -214,6 +215,16 @@ public class PlayerMovement3D : MonoBehaviour
 		reference.y = 0;
 		reference.Normalize();
 		return reference;
+	}
+
+	public void SetActive(bool enabled)
+	{
+		this.enabled = enabled;
+
+		if (!enabled)
+		{
+			SetVelocityToZero();
+		}
 	}
 	#endregion
 }
