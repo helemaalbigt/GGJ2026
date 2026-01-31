@@ -65,8 +65,8 @@ Rigidbody:
   m_GameObject: {fileID: 144665361355169105}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 10
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -78,10 +78,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7319773688435178946
 MonoBehaviour:
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Grabbable
   rigidBody: {fileID: 7643997837563536896}
   mesh: {fileID: 8600093256844233988}
-  renderer: {fileID: 0}
+  renderer: {fileID: 5069983167877508504}
 --- !u!1 &839618474972031060
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +248,11 @@ PrefabInstance:
       addedObject: {fileID: 5786122765497581109}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a50c6bb7073a543458d5bd29d3465329, type: 3}
+--- !u!23 &5069983167877508504 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7876180026482762211, guid: a50c6bb7073a543458d5bd29d3465329, type: 3}
+  m_PrefabInstance: {fileID: 6119861012771091333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6009108499916051566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a50c6bb7073a543458d5bd29d3465329, type: 3}

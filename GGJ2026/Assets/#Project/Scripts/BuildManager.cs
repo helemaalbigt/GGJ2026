@@ -11,14 +11,21 @@ public class BuildManager : MonoBehaviour
     public LayerMask mouseMoveMask;
     public LayerMask groundRefMask;
     public Transform grid;
+    public Transform inputHelper;
+    public GameObject grabHelper;
+    public GameObject moveHelper;
     
     [Header("DEBUG")]
     [SerializeField]
     private Grabbable _hoveredBlock;
     [SerializeField]
     private Grabbable _grabbedBlock;
-    [FormerlySerializedAs("_debugGrabbedCenterTarget")] [SerializeField]
+    [SerializeField]
     private Transform _groundCursor;
+    [SerializeField]
+    private Transform _dottedLine;
+    [SerializeField]
+    private Renderer _dottedLineRenderer;
 
     private Pose _grabbedCenterTargetPose;
     
@@ -92,8 +99,7 @@ public class BuildManager : MonoBehaviour
         DoHoverCheck();
         DoGrabCheck();
         DoMovement();
-
-        _groundCursor.position = _grabbedCenterTargetPose.position;
+        UpdateHelper();
     }
 
     private void LateUpdate() {
@@ -181,16 +187,40 @@ public class BuildManager : MonoBehaviour
     
     private void UpdateGroundCursor() {
         if (_grabbedBlock != null) {
-            if (Physics.Raycast(_grabbedBlock.transform.position, Vector3.down, out RaycastHit hit, 2f, groundRefMask)) {
+            if (Physics.Raycast(_grabbedBlock.GetBottomPos(0.005f), Vector3.down, out RaycastHit hit, 1f, groundRefMask)) {
                 _groundCursor.gameObject.SetActive(true);
+                _dottedLine.gameObject.SetActive(true);
+                _dottedLineRenderer.material.SetTextureScale("_MainTex", new Vector2(1f, 1f / Vector3.Distance(hit.point, _grabbedBlock.transform.position)));
+                
                 _groundCursor.position = hit.point;
-            }
-            else {
+                _dottedLine.position = hit.point;
+                _dottedLine.localScale = new Vector3(1, hit.distance, 1);
+            } else {
                 _groundCursor.gameObject.SetActive(false);
+                _dottedLine.gameObject.SetActive(false);
             }
         }
         else {
             _groundCursor.gameObject.SetActive(false);
+            _dottedLine.gameObject.SetActive(false);
+        }
+    }
+
+    private void UpdateHelper() {
+        if (_grabbedBlock != null) {
+            inputHelper.transform.position = _grabbedBlock.GetTopPos(0.01f);
+            
+            inputHelper.gameObject.SetActive(true);
+            grabHelper.gameObject.SetActive(false);
+            moveHelper.gameObject.SetActive(true);
+        } else if (_hoveredBlock != null) {
+            inputHelper.transform.position = _hoveredBlock.GetTopPos(0.01f);
+            
+            inputHelper.gameObject.SetActive(true);
+            grabHelper.gameObject.SetActive(true);
+            moveHelper.gameObject.SetActive(false);
+        } else {
+            inputHelper.gameObject.SetActive(false);
         }
     }
 }
