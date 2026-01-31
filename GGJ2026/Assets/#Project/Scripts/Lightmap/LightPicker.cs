@@ -35,8 +35,6 @@ public class LightmapPixelPicker : MonoBehaviour
         GUILayout.Label("Brightness Approx = " + string.Format("{0:0.00}", brightness1));
         GUILayout.Label("Brightness = " + string.Format("{0:0.00}", brightness2));
 
-
-
         GUILayout.Label("SR = " + string.Format("{0:0.00}", shadowColor.r));
         GUILayout.Label("SG = " + string.Format("{0:0.00}", shadowColor.g));
         GUILayout.Label("SB = " + string.Format("{0:0.00}", shadowColor.b));
