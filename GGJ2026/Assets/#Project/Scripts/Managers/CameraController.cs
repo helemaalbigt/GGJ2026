@@ -51,13 +51,13 @@ public class CameraController : MonoBehaviour
 
 
 	#region Methods
-	private void EnableCamera(object sender, int e)
+	private void EnableCamera(object sender, LevelCompleteEventArgs e)
 	{
 		// first disable the current camera
 		_currentCamera.Camera.gameObject.SetActive(false);
 
 		// select the level camera
-		_currentCamera = _levelCameras.Where((c) => c.LevelIndex == e).FirstOrDefault();
+		_currentCamera = _levelCameras.Where((c) => c.LevelIndex == e.LevelIndex).FirstOrDefault();
 
 		// set the easing attributes
 		_cameraBrain.DefaultBlend = _currentCamera.Ease;

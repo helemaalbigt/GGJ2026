@@ -14,7 +14,8 @@ public class CustomInputManager
 		RotateZYClockwise,
 		RotateZYCounterClockwise,
 		ResetLevel,
-		BeginLevel
+		BeginLevel,
+		StartGame,
 	}
 	public enum InputType
 	{
@@ -88,6 +89,7 @@ public class CustomInputManager
 		_playerInputActions.Add(_inputSystem.Player.RotateZYCounterClockWise);
 		_playerInputActions.Add(_inputSystem.Player.ResetLevel);
 		_playerInputActions.Add(_inputSystem.Player.BeginLevel);
+		_playerInputActions.Add(_inputSystem.Player.StartGame);
 	}
 
 	private InputAction GetAction(Player inputType)

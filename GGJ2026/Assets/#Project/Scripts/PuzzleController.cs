@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzleController : MonoBehaviour
 {
 	#region Editor Fields
+	[SerializeField] private bool _skipBuildFase;
 	[SerializeField] private int _levelIndex;
 	[SerializeField] private Collider _puzzleCompleteTrigger;
 	[SerializeField] private Vector3 _targetPositionOffset = new Vector3(-0.0086f, 0, 0);
@@ -17,7 +18,7 @@ public class PuzzleController : MonoBehaviour
 	#endregion
 
 	#region Properties
-	public static event EventHandler<int> LevelCompleted;
+	public static event EventHandler<LevelCompleteEventArgs> LevelCompleted;
 	public int LevelIndex => _levelIndex;
 	#endregion
 
@@ -55,7 +56,7 @@ public class PuzzleController : MonoBehaviour
 	#region Methods
 	private void OnPlayerEnteredTrigger()
 	{
-		LevelCompleted?.Invoke(this, _levelIndex);
+		LevelCompleted?.Invoke(this, new LevelCompleteEventArgs(_levelIndex, _skipBuildFase));
 	}
 	public void SetupLevel()
 	{
@@ -66,7 +67,8 @@ public class PuzzleController : MonoBehaviour
 
 		SetAllChildBlocksGravity(false);
 
-		foreach (var enableWhenActive in _enableWhenActive) {
+		foreach (var enableWhenActive in _enableWhenActive)
+		{
 			enableWhenActive.SetActive(true);
 		}
 	}
@@ -90,15 +92,15 @@ public class PuzzleController : MonoBehaviour
 
 	public void ResetLevel()
 	{
-		LevelCompleted?.Invoke(this, _levelIndex);	// reset camera
+		LevelCompleted?.Invoke(this, new LevelCompleteEventArgs(_levelIndex, _skipBuildFase));  // reset camera
 
 		if (_startPoses == null || _startPoses.Length != _grabbableObjects.Length)
 		{
 			Debug.LogError("Start poses not yet initialized.");
 			return;
-        }
+		}
 
-        for (int i = 0; i < _grabbableObjects.Length; i++)
+		for (int i = 0; i < _grabbableObjects.Length; i++)
 		{
 			var grabbableObject = _grabbableObjects[i];
 			var origPose = _startPoses[i];
@@ -117,8 +119,9 @@ public class PuzzleController : MonoBehaviour
 			//Destroy(grabbableObject);
 		}
 		SetAllChildBlocksGravity(false);
-		
-		foreach (var enableWhenActive in _enableWhenActive) {
+
+		foreach (var enableWhenActive in _enableWhenActive)
+		{
 			enableWhenActive.SetActive(false);
 		}
 	}
@@ -132,3 +135,14 @@ public class PuzzleController : MonoBehaviour
 	#endregion
 }
 
+public class LevelCompleteEventArgs : EventArgs
+{
+	public int LevelIndex { get; private set; }
+	public bool SkipBuildMode { get; private set; }
+
+	public LevelCompleteEventArgs(int levelIndex, bool skipBuildMode)
+	{
+		LevelIndex = levelIndex;
+		SkipBuildMode = skipBuildMode;
+	}
+}

@@ -41,9 +41,9 @@ public class TextFader : MonoBehaviour
 	#endregion
 
 	#region Methods
-	private void StartFadeText(object sender, int e)
+	private void StartFadeText(object sender, LevelCompleteEventArgs e)
 	{
-		if (_levelIndex != e) return;
+		if (_levelIndex != e.LevelIndex) return;
 		StartCoroutine(FadeText());
 	}
 
