@@ -51,10 +51,11 @@ public class GameController : MonoBehaviour
 	[Header("SFX")]
 	[SerializeField] private AudioSource _imBurningSfx;
 	[SerializeField] private AudioSource _iDiedSfx;
-	#endregion
+    [SerializeField] private AudioSource _outroMusic;
+    #endregion
 
-	#region Fields
-	private GameState _currentState;
+    #region Fields
+    private GameState _currentState;
 	private PlayerState _playerState;
 	private int _lastCompletedLevelIndex = -1;
 	private List<PuzzleController> _levels = new();
@@ -117,8 +118,12 @@ public class GameController : MonoBehaviour
 	{
 		if (_currentState == GameState.EndGame)
 		{
-			// set the player state
-			SetPlayerState(PlayerState.Safe);
+			if (!_outroMusic.isPlaying)
+			{
+				_outroMusic.Play();
+            }
+            // set the player state
+            SetPlayerState(PlayerState.Safe);
 			return;
 		}
 

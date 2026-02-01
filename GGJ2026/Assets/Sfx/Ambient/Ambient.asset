@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1233149941 &-8640841779346177598
-AudioContainerElement:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_02_{-8640841779346177598}
-  m_AudioClip: {fileID: 8300000, guid: 6ace5c7954cf9844dbfeac32fbf6b83e, type: 3}
-  m_Volume: 0
-  m_Enabled: 1
---- !u!1233149941 &-1713568247218906849
-AudioContainerElement:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: blocks_falling_{-1713568247218906849}
-  m_AudioClip: {fileID: 8300000, guid: 2d930635213fc274780974fc083f51f9, type: 3}
-  m_Volume: 0
-  m_Enabled: 1
 --- !u!1233149941 &488374103712866301
 AudioContainerElement:
   m_ObjectHideFlags: 1
@@ -39,16 +19,15 @@ AudioRandomContainer:
   m_Name: Ambient
   m_Volume: 0
   m_Pitch: 0
-  m_AutomaticTriggerTime: 10
+  m_AutomaticTriggerTime: 20
   m_LoopCount: 1
   m_VolumeRandomizationRange: {x: -6, y: 4}
   m_PitchRandomizationRange: {x: -1, y: 1}
-  m_AutomaticTriggerTimeRandomizationRange: {x: -52.173912, y: 39.13044}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 60}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
-  - {fileID: -1713568247218906849}
   - {fileID: 488374103712866301}
-  - {fileID: -8640841779346177598}
+  - {fileID: 8236193629554507942}
   m_AvoidRepeatingLast: 0
   m_PlaybackMode: 1
   m_TriggerMode: 1
@@ -58,3 +37,13 @@ AudioRandomContainer:
   m_PitchRandomizationEnabled: 1
   m_AutomaticTriggerTimeRandomizationEnabled: 1
   m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8236193629554507942
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: blocks_falling_{8236193629554507942}
+  m_AudioClip: {fileID: 8300000, guid: 2d930635213fc274780974fc083f51f9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
