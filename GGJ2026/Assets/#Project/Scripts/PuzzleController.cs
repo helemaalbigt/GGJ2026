@@ -11,6 +11,8 @@ public class PuzzleController : MonoBehaviour
 	[SerializeField] private Vector3 _targetPositionOffset = new Vector3(-0.0086f, 0, 0);
 	[SerializeField] private Grabbable[] _grabbableObjects;
 	[SerializeField] private GameObject[] _enableWhenActive;
+	[SerializeField] private Animator _animator;
+
 	private Pose[] _startPoses;
 	#endregion
 
@@ -46,6 +48,7 @@ public class PuzzleController : MonoBehaviour
 			{
 				playerMovement.MoveTo(transform.position + _targetPositionOffset);
 			}
+			_animator.enabled = true;
 
 			// destroy the trigger to prevent multiple triggers
 			Destroy(_puzzleCompleteTrigger, Time.fixedDeltaTime);

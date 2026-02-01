@@ -48,14 +48,14 @@ public class GameController : MonoBehaviour
 	[SerializeField] private UnityEvent EnteredEndGameState;
 	[SerializeField] private UnityEvent EnteredIntroState;
 
-    [Header("SFX")]
-    [SerializeField] private AudioSource _levelCompleteSfx;
-    [SerializeField] private AudioSource _imBurningSfx;
-    [SerializeField] private List<AudioSource> _iDiedSfx;
-    #endregion
+	[Header("SFX")]
+	[SerializeField] private AudioSource _levelCompleteSfx;
+	[SerializeField] private AudioSource _imBurningSfx;
+	[SerializeField] private List<AudioSource> _iDiedSfx;
+	#endregion
 
-    #region Fields
-    private GameState _currentState;
+	#region Fields
+	private GameState _currentState;
 	private PlayerState _playerState;
 	private int _lastCompletedLevelIndex = -1;
 	private List<PuzzleController> _levels = new();
@@ -63,6 +63,15 @@ public class GameController : MonoBehaviour
 	private float _previousBurnTime;
 	private float _burnTime;
 	private float _respawnTimer;
+
+	public PuzzleController CurrentLevel
+	{
+		get
+		{
+			var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex, 0, _levels.Count);
+			return _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
+		}
+	}
 	#endregion
 
 	#region Event
@@ -126,15 +135,15 @@ public class GameController : MonoBehaviour
 					if (_burnTime > _maxBurnTime)
 					{
 						PlayerDeath();
-                    }
-                    else
-                    {
-                        // only play the burning sfx if you're not dead
-                        if (!_imBurningSfx.isPlaying)
-                            _imBurningSfx.Play();
-                    }
+					}
+					else
+					{
+						// only play the burning sfx if you're not dead
+						if (!_imBurningSfx.isPlaying)
+							_imBurningSfx.Play();
+					}
 
-                    break;
+					break;
 				case PlayerState.Safe:
 					if (_burnTime > 0)
 						_burnTime -= _healRate * Time.deltaTime;
@@ -222,10 +231,10 @@ public class GameController : MonoBehaviour
 		// failsafe
 		if (sender is not PuzzleController) return;
 
-        _levelCompleteSfx.Play();
+		_levelCompleteSfx.Play();
 
-        // freeze the current level 
-        var clampedCurrentLevelIndex = Mathf.Clamp(e.LevelIndex - 1, 0, _levels.Count);
+		// freeze the current level 
+		var clampedCurrentLevelIndex = Mathf.Clamp(e.LevelIndex - 1, 0, _levels.Count);
 		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
 		currentLevel.FreezeLevel();
 
@@ -272,10 +281,10 @@ public class GameController : MonoBehaviour
 	}
 
 	private void PlayerDeath()
-    {
-        _imBurningSfx.Stop();
-        _iDiedSfx[UnityEngine.Random.Range(0, _iDiedSfx.Count)].Play();
-        SetPlayerState(PlayerState.Dead);
+	{
+		_imBurningSfx.Stop();
+		_iDiedSfx[UnityEngine.Random.Range(0, _iDiedSfx.Count)].Play();
+		SetPlayerState(PlayerState.Dead);
 		// enable the gameOver state
 		SetGameState(GameState.GameOver);
 	}
