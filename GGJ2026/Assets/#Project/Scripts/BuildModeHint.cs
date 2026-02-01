@@ -5,6 +5,9 @@ public class BuildModeHint : MonoBehaviour
 {
     public GameObject hintGameObject;
     public GameController.GameState requiredGameState;
+    public GameController gameController;
+    public int minLevel = 0;
+    public int maxLevel = 3;
 
     private void OnEnable()
     {
@@ -18,7 +21,7 @@ public class BuildModeHint : MonoBehaviour
 
     private void ToggleVisibility(object sender, GameController.GameState gameState)
     {
-        if (gameState == requiredGameState)
+        if (gameState == requiredGameState && gameController.CurrentLevel.LevelIndex >= minLevel && gameController.CurrentLevel.LevelIndex <= maxLevel)
         {
             StartCoroutine(WaitAndSetVisibility());
         }
