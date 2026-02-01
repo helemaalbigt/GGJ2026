@@ -116,7 +116,7 @@ public class PuzzleController : MonoBehaviour
 		for (int i = 0; i < _grabbableObjects.Length; i++)
 		{
 			var grabbableObject = _grabbableObjects[i];
-			//Destroy(grabbableObject);
+			Destroy(grabbableObject);
 		}
 		SetAllChildBlocksGravity(false);
 
