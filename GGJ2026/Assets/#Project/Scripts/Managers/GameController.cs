@@ -90,8 +90,8 @@ public class GameController : MonoBehaviour
 		_levels = FindObjectsByType<PuzzleController>(FindObjectsSortMode.None).ToList();
 		if (_lastCompletedLevelIndex >= 0)
 		{
-			// warp to selectec starting level
-			RestartLevel();
+			// warp to selectec starting level, do not reset objects as these are not yet instantiated at this point
+			RestartLevel(false);
 		}
 	}
 	private void OnEnable()
@@ -165,7 +165,8 @@ public class GameController : MonoBehaviour
 
 			if (_respawnTimer > _respawnTime)
 			{
-				RestartLevel();
+				// do not reset objects when player dies
+				RestartLevel(false);
 			}
 		}
 	}
@@ -190,12 +191,12 @@ public class GameController : MonoBehaviour
 		PlayerStateChanged?.Invoke(this, playerState);
 	}
 
-	public void RestartLevel()
+	public void RestartLevel(bool resetObjects = false)
 	{
 		var clampedCurrentLevelIndex = Mathf.Clamp(_lastCompletedLevelIndex, 0, _levels.Count);
 		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
 		// reset the level
-		currentLevel.ResetLevel();
+		currentLevel.ResetLevel(resetObjects);
 
 		// set the player position to the level position again
 		_shadowCheck.transform.position = currentLevel.transform.position;
@@ -218,8 +219,8 @@ public class GameController : MonoBehaviour
 			return;
 		}
 
-		// otherwise just restart the level
-		RestartLevel();
+		// otherwise just restart the level, reset objects as well
+		RestartLevel(true);
 	}
 
 	private void BeginLevel(InputAction.CallbackContext context)

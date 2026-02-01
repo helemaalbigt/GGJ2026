@@ -93,7 +93,7 @@ public class PuzzleController : MonoBehaviour
 		}
 	}
 
-	public void ResetLevel()
+	public void ResetLevel(bool resetObjects)
 	{
 		LevelCompleted?.Invoke(this, new LevelCompleteEventArgs(_levelIndex, _skipBuildFase));  // reset camera
 
@@ -103,12 +103,16 @@ public class PuzzleController : MonoBehaviour
 			return;
 		}
 
-		for (int i = 0; i < _grabbableObjects.Length; i++)
+		if (resetObjects)
 		{
-			var grabbableObject = _grabbableObjects[i];
-			var origPose = _startPoses[i];
-			//TODO: lerp this because its cool
-			grabbableObject.rigidBody.Move(origPose.position, origPose.rotation);
+
+			for (int i = 0; i < _grabbableObjects.Length; i++)
+			{
+				var grabbableObject = _grabbableObjects[i];
+				var origPose = _startPoses[i];
+				//TODO: lerp this because its cool
+				grabbableObject.rigidBody.Move(origPose.position, origPose.rotation);
+			}
 		}
 
 		SetAllChildBlocksGravity(false);
