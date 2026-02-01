@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
 		GameOver,
 		StartGame,
 		EndGame,
+		WaitForIntro,
+		Intro,
 	}
 	public enum PlayerState
 	{
@@ -27,9 +29,9 @@ public class GameController : MonoBehaviour
 	#region EditorFields
 	[SerializeField] private bool DEBUG_DONT_SWITCH_STATE = false;
 	[SerializeField] private GameState _startingState = GameState.StartGame;
-    [SerializeField] private int _startingLevel = 0;
+	[SerializeField] private int _startingLevel = 0;
 
-    [Header("PlayerHealth")]
+	[Header("PlayerHealth")]
 	[SerializeField] private GroundColorPicker _shadowCheck;
 	[SerializeField] private float _maxBurnTime;
 	[SerializeField] private float _burnRate;
@@ -44,6 +46,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private UnityEvent EnteredGameOverState;
 	[SerializeField] private UnityEvent EnteredStartGameState;
 	[SerializeField] private UnityEvent EnteredEndGameState;
+	[SerializeField] private UnityEvent EnteredIntroState;
 	#endregion
 
 	#region Fields
@@ -70,29 +73,37 @@ public class GameController : MonoBehaviour
 	private void Awake()
 	{
 		_lastCompletedLevelIndex = _startingLevel - 1;
-        SetGameState(_startingState);
+		SetGameState(_startingState);
 		_levels = FindObjectsByType<PuzzleController>(FindObjectsSortMode.None).ToList();
 		if (_lastCompletedLevelIndex >= 0)
 		{
 			// warp to selectec starting level
 			RestartLevel();
-        }
-    }
+		}
+	}
 	private void OnEnable()
 	{
 		PuzzleController.LevelCompleted += OnPuzzleCompleted;
 
 		CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.BeginLevel, BeginLevel);
 		CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.ResetLevel, ResetLevel);
+
+		CustomInputManager.SubscribeToPerformed(CustomInputManager.Player.StartGame, StartGame);
 	}
 
 	private void OnDisable()
 	{
 		PuzzleController.LevelCompleted -= OnPuzzleCompleted;
+
+		CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.BeginLevel, BeginLevel);
+		CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.ResetLevel, ResetLevel);
+
+		CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.StartGame, StartGame);
 	}
 	private void Update()
 	{
-		if (_currentState == GameState.EndGame) {
+		if (_currentState == GameState.EndGame)
+		{
 			// set the player state
 			SetPlayerState(PlayerState.Safe);
 			return;
@@ -143,6 +154,13 @@ public class GameController : MonoBehaviour
 	#endregion
 
 	#region Methods
+	private void StartGame(InputAction.CallbackContext context)
+	{
+		if (_currentState == GameState.WaitForIntro)
+		{
+			SetGameState(GameState.StartGame);
+		}
+	}
 	private void SetPlayerState(PlayerState playerState)
 	{
 		// prevent duplicate
@@ -191,26 +209,26 @@ public class GameController : MonoBehaviour
 		currentLevel.StartLevel();
 	}
 
-	private void OnPuzzleCompleted(object sender, int levelIndex)
+	private void OnPuzzleCompleted(object sender, LevelCompleteEventArgs e)
 	{
 		// failsafe
 		if (sender is not PuzzleController) return;
 
 		// freeze the current level 
-		var clampedCurrentLevelIndex = Mathf.Clamp(levelIndex - 1, 0, _levels.Count);
+		var clampedCurrentLevelIndex = Mathf.Clamp(e.LevelIndex - 1, 0, _levels.Count);
 		var currentLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedCurrentLevelIndex).FirstOrDefault();
 		currentLevel.FreezeLevel();
 
 		// set the current level index 
-		_lastCompletedLevelIndex = levelIndex;
+		_lastCompletedLevelIndex = e.LevelIndex;
 
-		var clampedNextLevelIndex = Mathf.Clamp(levelIndex, 0, _levels.Count);
+		var clampedNextLevelIndex = Mathf.Clamp(e.LevelIndex, 0, _levels.Count);
 		var nextLevel = _levels.Where((puzzle) => puzzle.LevelIndex == clampedNextLevelIndex).FirstOrDefault();
 		nextLevel.SetupLevel();
 
 		if (DEBUG_DONT_SWITCH_STATE) return;
 		// update the game state to the building state
-		SetGameState(GameState.Building);
+		SetGameState(e.SkipBuildMode ? GameState.Movement : GameState.Building);
 	}
 
 
@@ -235,8 +253,11 @@ public class GameController : MonoBehaviour
 			case GameState.EndGame:
 				EnteredEndGameState?.Invoke();
 				break;
+			case GameState.Intro:
+				EnteredIntroState?.Invoke();
+				break;
 		}
-		
+
 		GameStateChanged?.Invoke(this, state);
 	}
 
