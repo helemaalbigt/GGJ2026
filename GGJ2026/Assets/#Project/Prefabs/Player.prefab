@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9122024948485340093}
   m_Layer: 5
-  m_Name: CloseBuildModeHint
+  m_Name: ResetBuildModeHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1800,7 +1800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14afeb540fe3b5540bed7d044f58c6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildModeHint
-  buildModeHint: {fileID: 3688561130359841962}
+  hintGameObject: {fileID: 3688561130359841962}
+  requiredGameState: 1
 --- !u!114 &369978325599248921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1813,4 +1814,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14afeb540fe3b5540bed7d044f58c6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildModeHint
-  buildModeHint: {fileID: 223702076281668083}
+  hintGameObject: {fileID: 223702076281668083}
+  requiredGameState: 0

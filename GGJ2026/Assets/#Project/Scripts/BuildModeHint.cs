@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class BuildModeHint : MonoBehaviour {
-    public GameObject buildModeHint;
-  
+public class BuildModeHint : MonoBehaviour
+{
+    public GameObject hintGameObject;
+    public GameController.GameState requiredGameState;
+
     private void OnEnable()
     {
         GameController.GameStateChanged += ToggleVisibility;
@@ -13,19 +15,23 @@ public class BuildModeHint : MonoBehaviour {
     {
         GameController.GameStateChanged -= ToggleVisibility;
     }
-    
-    private void ToggleVisibility(object sender, GameController.GameState gameState) {
-        if (gameState == GameController.GameState.Building) {
+
+    private void ToggleVisibility(object sender, GameController.GameState gameState)
+    {
+        if (gameState == requiredGameState)
+        {
             StartCoroutine(WaitAndSetVisibility());
         }
-        else {
+        else
+        {
             StopAllCoroutines();
-            buildModeHint.SetActive(false);
+            hintGameObject.SetActive(false);
         }
     }
 
-    private IEnumerator WaitAndSetVisibility() {
+    private IEnumerator WaitAndSetVisibility()
+    {
         yield return new WaitForSeconds(3f);
-        buildModeHint.SetActive(true);
+        hintGameObject.SetActive(true);
     }
 }

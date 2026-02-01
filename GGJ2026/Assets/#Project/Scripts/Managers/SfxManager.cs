@@ -7,6 +7,7 @@ public class SfxManager : MonoBehaviour
     // default SFX
     public AudioSource onCollisionSfx;
 
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4417910004229023773}
   - component: {fileID: 2747322644049801508}
   m_Layer: 0
-  m_Name: AmbientWind00
+  m_Name: AmbientWind_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1349669339719477299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.014, y: 0, z: 0.53}
+  m_LocalPosition: {x: -0.18, y: 0, z: 0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,7 +51,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 256
+  Priority: 250
   DopplerLevel: 1
   MinDistance: 0.1
   MaxDistance: 0.3
