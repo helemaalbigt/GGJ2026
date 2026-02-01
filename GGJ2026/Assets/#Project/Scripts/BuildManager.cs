@@ -94,11 +94,13 @@ public class BuildManager : MonoBehaviour
     }
     
     private void RotateZYClockwisePressed(InputAction.CallbackContext obj) {
-        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, 90f) * _grabbedCenterTargetPose.rotation;
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 90f, 0) * _grabbedCenterTargetPose.rotation;
+        //_grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, 90f) * _grabbedCenterTargetPose.rotation;
     }
     
     private void RotateZYCounterClockwisePressed(InputAction.CallbackContext obj) {
-        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, -90f) * _grabbedCenterTargetPose.rotation;
+        _grabbedCenterTargetPose.rotation = Quaternion.Euler(0, -90f, 0) * _grabbedCenterTargetPose.rotation;
+        //_grabbedCenterTargetPose.rotation = Quaternion.Euler(0, 0, -90f) * _grabbedCenterTargetPose.rotation;
     }
 
     void Update() {
