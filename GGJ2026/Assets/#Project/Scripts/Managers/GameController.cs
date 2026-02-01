@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
 
 	[Header("SFX")]
 	[SerializeField] private AudioSource _imBurningSfx;
-	[SerializeField] private List<AudioSource> _iDiedSfx;
+	[SerializeField] private AudioSource _iDiedSfx;
 	#endregion
 
 	#region Fields
@@ -206,12 +206,12 @@ public class GameController : MonoBehaviour
 
 		// set the playerState to safe
 		SetPlayerState(PlayerState.Safe);
-	}
+    }
 
 	private void ResetLevel(InputAction.CallbackContext context)
 	{
 		RestartLevel();
-	}
+    }
 
 	private void BeginLevel(InputAction.CallbackContext context)
 	{
@@ -280,7 +280,7 @@ public class GameController : MonoBehaviour
 	private void PlayerDeath()
 	{
 		_imBurningSfx.Stop();
-		_iDiedSfx[UnityEngine.Random.Range(0, _iDiedSfx.Count)].Play();
+		_iDiedSfx.Play();
 		SetPlayerState(PlayerState.Dead);
 		// enable the gameOver state
 		SetGameState(GameState.GameOver);

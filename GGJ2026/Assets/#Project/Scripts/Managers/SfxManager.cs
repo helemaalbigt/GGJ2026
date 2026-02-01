@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SfxManager : MonoBehaviour
@@ -5,7 +6,7 @@ public class SfxManager : MonoBehaviour
     public static SfxManager Instance { get; private set; }
 
     // default SFX
-    public AudioSource onCollisionSfx;
+    [SerializeField] private List<AudioSource> onCollisionSfx;
 
 
     private void Awake()
@@ -20,5 +21,13 @@ public class SfxManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void PlayOnCollisionSfx(float volume)
+    {
+        if (this.onCollisionSfx.Count == 0) return;
+        int randomIndex = Random.Range(0, this.onCollisionSfx.Count);
+        onCollisionSfx[randomIndex].volume = volume;
+        onCollisionSfx[randomIndex].Play();
     }
 }

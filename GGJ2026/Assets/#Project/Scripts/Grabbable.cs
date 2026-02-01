@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Grabbable : MonoBehaviour
@@ -7,14 +8,6 @@ public class Grabbable : MonoBehaviour
     public Renderer renderer;
     public AudioSource onCollisionSfx;
 
-    private void Start()
-    {
-        // grab default SFX from SfxManager if not set
-        if (this.onCollisionSfx == null)
-        {
-            this.onCollisionSfx = SfxManager.Instance.onCollisionSfx;
-        }
-    }
 
     public void SetHovered(bool hovered) {
         if (hovered) {
@@ -38,7 +31,14 @@ public class Grabbable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 1)
+        if (onCollisionSfx == null)
+        {
+            // play default sound at volume depending on collision force
+            SfxManager.Instance.PlayOnCollisionSfx(Mathf.InverseLerp(0, 10f, collision.relativeVelocity.magnitude));
+        }
+        else
+            // play custom assigned sound
             onCollisionSfx.Play();
+
     }
 }
