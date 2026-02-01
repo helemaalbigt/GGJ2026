@@ -60,6 +60,15 @@ public class BuildManager : MonoBehaviour
         CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateXYCounterClockwise, RotateXYCounterClockwisePressed);
         CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateZYClockwise, RotateZYClockwisePressed);
         CustomInputManager.UnsubscribeFromPerformed(CustomInputManager.Player.RotateZYCounterClockwise, RotateZYCounterClockwisePressed);
+
+        if (_hoveredBlock != null) {
+            _hoveredBlock.SetHovered(false);
+            _hoveredBlock = null;
+        }
+        _grabbedBlock = null;
+        
+        UpdateHelper();
+        UpdateGroundCursor();
     }
 
     private void ShiftPlanePressed(InputAction.CallbackContext obj) {
