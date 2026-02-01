@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -209,6 +210,15 @@ public class GameController : MonoBehaviour
 
 	private void ResetLevel(InputAction.CallbackContext context)
 	{
+		if (_currentState == GameState.Intro || _currentState == GameState.StartGame || _currentState == GameState.GameOver) return;
+
+		if (_currentState == GameState.EndGame)
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			return;
+		}
+
+		// otherwise just restart the level
 		RestartLevel();
 	}
 
