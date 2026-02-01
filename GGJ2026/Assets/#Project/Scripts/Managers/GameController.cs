@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
 		GameOver,
 		StartGame,
 		EndGame,
-		WaitForIntro,
 		Intro,
 	}
 	public enum PlayerState
@@ -175,7 +174,7 @@ public class GameController : MonoBehaviour
 	#region Methods
 	private void StartGame(InputAction.CallbackContext context)
 	{
-		if (_currentState == GameState.WaitForIntro)
+		if (_currentState == GameState.Intro)
 		{
 			SetGameState(GameState.StartGame);
 		}
@@ -206,12 +205,12 @@ public class GameController : MonoBehaviour
 
 		// set the playerState to safe
 		SetPlayerState(PlayerState.Safe);
-    }
+	}
 
 	private void ResetLevel(InputAction.CallbackContext context)
 	{
 		RestartLevel();
-    }
+	}
 
 	private void BeginLevel(InputAction.CallbackContext context)
 	{

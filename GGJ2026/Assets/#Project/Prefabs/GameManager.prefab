@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   DEBUG_DONT_SWITCH_STATE: 0
-  _startingState: 5
+  _startingState: 6
   _startingLevel: 0
   _shadowCheck: {fileID: 0}
   _maxBurnTime: 1
