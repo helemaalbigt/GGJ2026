@@ -10,6 +10,7 @@ public class SunController : MonoBehaviour
     [SerializeField] private Transform endPosition;
     [SerializeField] private Color startColor;
     [SerializeField] private Color endColor;
+    [SerializeField] private Gradient gradient;
     [SerializeField] private float speed = .2f;
 
     private Light sunLight;
@@ -26,8 +27,9 @@ public class SunController : MonoBehaviour
     {
         t += Time.deltaTime * speed;
 
-        sunLight.color = Color.Lerp(startColor, endColor, t);
+        sunLight.color = gradient.Evaluate(t);
         sun.transform.position = Vector3.Lerp(startPosition.position, endPosition.position, t);
         sun.transform.rotation = Quaternion.Lerp(startPosition.rotation, endPosition.rotation, t);
+        sunLight.intensity = Mathf.Lerp(1f, 0.5f, t);
     }
 }

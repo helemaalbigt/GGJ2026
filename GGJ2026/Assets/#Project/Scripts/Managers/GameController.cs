@@ -26,9 +26,10 @@ public class GameController : MonoBehaviour
 
 	#region EditorFields
 	[SerializeField] private bool DEBUG_DONT_SWITCH_STATE = false;
-	[SerializeField] private GameState _startingState;
+	[SerializeField] private GameState _startingState = GameState.StartGame;
+    [SerializeField] private int _startingLevel = 0;
 
-	[Header("PlayerHealth")]
+    [Header("PlayerHealth")]
 	[SerializeField] private GroundColorPicker _shadowCheck;
 	[SerializeField] private float _maxBurnTime;
 	[SerializeField] private float _burnRate;
@@ -68,9 +69,15 @@ public class GameController : MonoBehaviour
 	#region Mono
 	private void Awake()
 	{
-		SetGameState(_startingState);
+		_lastCompletedLevelIndex = _startingLevel - 1;
+        SetGameState(_startingState);
 		_levels = FindObjectsByType<PuzzleController>(FindObjectsSortMode.None).ToList();
-	}
+		if (_lastCompletedLevelIndex >= 0)
+		{
+			// warp to selectec starting level
+			RestartLevel();
+        }
+    }
 	private void OnEnable()
 	{
 		PuzzleController.LevelCompleted += OnPuzzleCompleted;

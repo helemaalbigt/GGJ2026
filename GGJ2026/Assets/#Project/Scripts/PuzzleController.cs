@@ -90,9 +90,15 @@ public class PuzzleController : MonoBehaviour
 
 	public void ResetLevel()
 	{
-		LevelCompleted?.Invoke(this, _levelIndex);
+		LevelCompleted?.Invoke(this, _levelIndex);	// reset camera
 
-		for (int i = 0; i < _grabbableObjects.Length; i++)
+		if (_startPoses == null || _startPoses.Length != _grabbableObjects.Length)
+		{
+			Debug.LogError("Start poses not yet initialized.");
+			return;
+        }
+
+        for (int i = 0; i < _grabbableObjects.Length; i++)
 		{
 			var grabbableObject = _grabbableObjects[i];
 			var origPose = _startPoses[i];
