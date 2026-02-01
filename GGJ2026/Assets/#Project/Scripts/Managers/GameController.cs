@@ -49,7 +49,6 @@ public class GameController : MonoBehaviour
 	[SerializeField] private UnityEvent EnteredIntroState;
 
 	[Header("SFX")]
-	[SerializeField] private AudioSource _levelCompleteSfx;
 	[SerializeField] private AudioSource _imBurningSfx;
 	[SerializeField] private List<AudioSource> _iDiedSfx;
 	#endregion
@@ -230,8 +229,6 @@ public class GameController : MonoBehaviour
 	{
 		// failsafe
 		if (sender is not PuzzleController) return;
-
-		_levelCompleteSfx.Play();
 
 		// freeze the current level 
 		var clampedCurrentLevelIndex = Mathf.Clamp(e.LevelIndex - 1, 0, _levels.Count);
