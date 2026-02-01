@@ -23,12 +23,12 @@ public class PlayerMovement3D : MonoBehaviour
 	[SerializeField] private float _groundedCheckRadius;
 	[SerializeField] private LayerMask _groundedLayerMask;
 
-    [Header("SFX")]
-    [SerializeField] private AudioSource _runningSfx;
-    #endregion
+	[Header("SFX")]
+	[SerializeField] private AudioSource _runningSfx;
+	#endregion
 
-    #region Fields
-    private Transform _cameraPivot;
+	#region Fields
+	private Transform _cameraPivot;
 	private InputAction _moveInput;
 	private Vector3 _inputDirection;
 	private Vector3 _lookDirection;
@@ -125,8 +125,8 @@ public class PlayerMovement3D : MonoBehaviour
 		Vector3 camForward = Horizontal(_cameraPivot.forward);
 		Vector3 camRight = Horizontal(_cameraPivot.right);
 
-        // play running sfx only when there is input
-        if (input.magnitude > 0)
+		// play running sfx only when there is input
+		if (input.magnitude > 0)
 		{
 			if (!_runningSfx.isPlaying)
 				_runningSfx.Play();
@@ -134,9 +134,9 @@ public class PlayerMovement3D : MonoBehaviour
 		else
 		{
 			_runningSfx.Stop();
-        }
+		}
 
-        _inputDirection = input.y * camForward + input.x * camRight;
+		_inputDirection = input.y * camForward + input.x * camRight;
 	}
 
 	private void CalculateDrag()
@@ -168,16 +168,16 @@ public class PlayerMovement3D : MonoBehaviour
 		if (!CanMove)
 		{
 			moveVector = Vector3.zero;
-        }
+		}
 
-        if (IsGrounded)
+		if (IsGrounded)
 		{
 			moveVector *= _speed * SpeedModifier;
 			moveVector.y = -1f;
-        }
+		}
 		else
 		{
-            moveVector *= _airSpeed * AirSpeedModifier;
+			moveVector *= _airSpeed * AirSpeedModifier;
 			if (UseGravity)
 			{
 				moveVector.y = _gravityForce * GravityModifier;
@@ -203,9 +203,9 @@ public class PlayerMovement3D : MonoBehaviour
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed);
 	}
 	public void SetVelocityToZero()
-    {
-        _runningSfx.Stop();
-        _rb.linearVelocity = Vector3.zero;
+	{
+		_runningSfx.Stop();
+		_rb.linearVelocity = Vector3.zero;
 	}
 
 	public void AddForce(Vector3 force, ForceMode mode = ForceMode.Acceleration)
@@ -246,7 +246,7 @@ public class PlayerMovement3D : MonoBehaviour
 	public void MoveTo(Vector3 position)
 	{
 		_runningSfx.Stop();
-        StartCoroutine(MovePlayerStatic(position));
+		StartCoroutine(MovePlayerStatic(position));
 	}
 	private IEnumerator MovePlayerStatic(Vector3 target)
 	{
@@ -260,7 +260,7 @@ public class PlayerMovement3D : MonoBehaviour
 
 		while (travelledTime < travelTime)
 		{
-			travelledTime += Time.deltaTime / 3;
+			travelledTime += Time.deltaTime / 10;
 			_rb.MovePosition(Vector3.Lerp(curPosition, target, travelledTime / travelTime));
 			yield return null;
 		}

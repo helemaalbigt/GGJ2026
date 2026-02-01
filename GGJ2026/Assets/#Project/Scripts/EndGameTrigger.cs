@@ -5,6 +5,7 @@ public class EndGameTrigger : MonoBehaviour
 {
 	#region Editor Fields
 	[SerializeField] private Vector3 _targetPositionOffset;
+	[SerializeField] private Animator _animator;
 	#endregion
 
 	#region Fields
@@ -22,6 +23,8 @@ public class EndGameTrigger : MonoBehaviour
 		// get the game manager
 		var gameController = FindFirstObjectByType<GameController>();
 		gameController.SetGameState(GameController.GameState.EndGame);
+
+		_animator.enabled = true;
 
 		if (other.TryGetComponent<PlayerMovement3D>(out var playerMovement))
 		{

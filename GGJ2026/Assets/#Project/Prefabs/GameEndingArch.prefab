@@ -63,6 +63,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4971968255114282542}
   m_SourcePrefab: {fileID: 100100000, guid: f9e0561d9edc25a4bb2ad824c62a84cf, type: 3}
+--- !u!95 &2602713825116562568 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 688748548361805705, guid: f9e0561d9edc25a4bb2ad824c62a84cf, type: 3}
+  m_PrefabInstance: {fileID: 3283228895267650305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7025633349393255987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5480967634268779826, guid: f9e0561d9edc25a4bb2ad824c62a84cf, type: 3}
@@ -81,3 +86,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndGameTrigger
   _targetPositionOffset: {x: -0.0086, y: 0, z: 0}
+  _animator: {fileID: 2602713825116562568}
