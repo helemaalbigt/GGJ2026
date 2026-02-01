@@ -21,4 +21,8 @@ public class Grabbable : MonoBehaviour
     public Vector3 GetBottomPos(float margin = 0f) {
         return renderer.bounds.center - (renderer.bounds.extents.y + margin) * Vector3.up;
     }
+    
+    public Vector3 GetBackPos(float margin = 0f) {
+        return renderer.bounds.center - (renderer.bounds.extents.x + margin) * Vector3.up;
+    }
 }

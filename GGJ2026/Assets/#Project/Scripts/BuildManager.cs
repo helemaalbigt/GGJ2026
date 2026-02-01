@@ -189,7 +189,7 @@ public class BuildManager : MonoBehaviour
     private void UpdateGridGuide() {
         grid.gameObject.SetActive(_grabbedBlock != null);
         if (_grabbedBlock != null) {
-            grid.position = _grabbedBlock.transform.position;
+            grid.position = _moveVertically ? _grabbedBlock.GetBackPos(0.005f) : new Vector3(_grabbedBlock.transform.position.x, 0.0025f, _grabbedBlock.transform.position.z);
             grid.eulerAngles = _moveVertically ? new Vector3(0,-90f, -90f) : new Vector3(90f,0,0);
         }
     }
