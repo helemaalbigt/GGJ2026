@@ -6,6 +6,7 @@ public class EndGameTrigger : MonoBehaviour
 	#region Editor Fields
 	[SerializeField] private Vector3 _targetPositionOffset;
 	[SerializeField] private Animator _animator;
+
 	#endregion
 
 	#region Fields
