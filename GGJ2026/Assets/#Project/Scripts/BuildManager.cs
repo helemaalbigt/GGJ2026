@@ -69,6 +69,7 @@ public class BuildManager : MonoBehaviour
         
         UpdateHelper();
         UpdateGroundCursor();
+        UpdateGridGuide();
     }
 
     private void ShiftPlanePressed(InputAction.CallbackContext obj) {
