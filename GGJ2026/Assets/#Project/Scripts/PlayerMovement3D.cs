@@ -22,10 +22,13 @@ public class PlayerMovement3D : MonoBehaviour
 	[SerializeField] private float _groundedCheckUpOffset;
 	[SerializeField] private float _groundedCheckRadius;
 	[SerializeField] private LayerMask _groundedLayerMask;
-	#endregion
 
-	#region Fields
-	private Transform _cameraPivot;
+    [Header("SFX")]
+    [SerializeField] private AudioSource _runningSfx;
+    #endregion
+
+    #region Fields
+    private Transform _cameraPivot;
 	private InputAction _moveInput;
 	private Vector3 _inputDirection;
 	private Vector3 _lookDirection;
@@ -122,7 +125,18 @@ public class PlayerMovement3D : MonoBehaviour
 		Vector3 camForward = Horizontal(_cameraPivot.forward);
 		Vector3 camRight = Horizontal(_cameraPivot.right);
 
-		_inputDirection = input.y * camForward + input.x * camRight;
+        // play running sfx only when there is input
+        if (input.magnitude > 0)
+		{
+			if (!_runningSfx.isPlaying)
+				_runningSfx.Play();
+		}
+		else
+		{
+			_runningSfx.Stop();
+        }
+
+        _inputDirection = input.y * camForward + input.x * camRight;
 	}
 
 	private void CalculateDrag()
@@ -154,16 +168,16 @@ public class PlayerMovement3D : MonoBehaviour
 		if (!CanMove)
 		{
 			moveVector = Vector3.zero;
-		}
+        }
 
-		if (IsGrounded)
+        if (IsGrounded)
 		{
 			moveVector *= _speed * SpeedModifier;
 			moveVector.y = -1f;
-		}
+        }
 		else
 		{
-			moveVector *= _airSpeed * AirSpeedModifier;
+            moveVector *= _airSpeed * AirSpeedModifier;
 			if (UseGravity)
 			{
 				moveVector.y = _gravityForce * GravityModifier;
@@ -189,8 +203,9 @@ public class PlayerMovement3D : MonoBehaviour
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed);
 	}
 	public void SetVelocityToZero()
-	{
-		_rb.linearVelocity = Vector3.zero;
+    {
+        _runningSfx.Stop();
+        _rb.linearVelocity = Vector3.zero;
 	}
 
 	public void AddForce(Vector3 force, ForceMode mode = ForceMode.Acceleration)
@@ -230,7 +245,8 @@ public class PlayerMovement3D : MonoBehaviour
 
 	public void MoveTo(Vector3 position)
 	{
-		StartCoroutine(MovePlayerStatic(position));
+		_runningSfx.Stop();
+        StartCoroutine(MovePlayerStatic(position));
 	}
 	private IEnumerator MovePlayerStatic(Vector3 target)
 	{
