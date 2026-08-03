@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		GameController.BurnTimeUpdated += UpdateHealthBar;
 	}
+
 	private void OnDisable()
 	{
 		GameController.BurnTimeUpdated -= UpdateHealthBar;
@@ -31,7 +32,11 @@ public class PlayerHealth : MonoBehaviour
 	private void UpdateHealthBar(object sender, float e)
 	{
 		_image.fillAmount = 1 - e;
+
+		var active = _image.fillAmount >= 1;
+		_image.gameObject.SetActive(active);
 	}
+
 	#endregion
 
 	#region Methods

@@ -55,7 +55,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.015, z: 0.12}
+  m_Size: {x: 0.3, y: 0.15, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7643997837563536896
 Rigidbody:
@@ -99,6 +99,7 @@ MonoBehaviour:
   rigidBody: {fileID: 7643997837563536896}
   mesh: {fileID: 5808947244444728022}
   renderer: {fileID: 5448646148677114627}
+  onCollisionSfx: {fileID: 0}
 --- !u!1001 &2710571195315911154
 PrefabInstance:
   m_ObjectHideFlags: 0
