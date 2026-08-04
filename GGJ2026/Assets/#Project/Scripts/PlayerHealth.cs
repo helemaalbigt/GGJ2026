@@ -33,8 +33,8 @@ public class PlayerHealth : MonoBehaviour
 	{
 		_image.fillAmount = 1 - e;
 
-		var active = _image.fillAmount >= 1;
-		_image.gameObject.SetActive(active);
+		var active = 1 - _image.fillAmount > float.Epsilon;
+		_image.transform.parent.gameObject.SetActive(active);
 	}
 
 	#endregion
