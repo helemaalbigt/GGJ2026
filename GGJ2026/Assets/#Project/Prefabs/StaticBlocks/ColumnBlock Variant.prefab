@@ -127,11 +127,16 @@ PrefabInstance:
       value: ColumnBlock Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6375259122585724984, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375259122585724984, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 913134585123585240, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
+    - {fileID: 5769248997968956905, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4383416901851754604, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
     - {fileID: 3528620861460403658, guid: 73c90a886cf7eef4db4eb8fe28c1884b, type: 3}
@@ -200,6 +205,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a81cfdfb94222e848a83611fd9e0dccc, type: 3}
       propertyPath: m_Name
       value: column_static
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a81cfdfb94222e848a83611fd9e0dccc, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

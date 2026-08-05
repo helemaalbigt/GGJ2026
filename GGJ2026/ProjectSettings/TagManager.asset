@@ -17,8 +17,8 @@ TagManager:
   - MouseMovementPlane
   - Block
   - ShadowBlock
-  - 
-  - 
+  - DynamicBlocks
+  - StaticBlocks
   - 
   - 
   - 

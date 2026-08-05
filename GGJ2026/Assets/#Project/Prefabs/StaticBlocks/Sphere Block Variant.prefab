@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7562831553878375125}
   - component: {fileID: 1498431505806264654}
   - component: {fileID: 4320985922195186676}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere Block Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2547140357691091081, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4964220665924995966, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -282,6 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7513846840199084508, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
+    - {fileID: 4964220665924995966, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
     m_RemovedGameObjects:
     - {fileID: 688530254930357028, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}
     - {fileID: 639387736832781733, guid: 1f8973e131fe2cc4198a13f6b9fc91a6, type: 3}

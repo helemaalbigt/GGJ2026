@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4964220665924995966}
   - component: {fileID: 7513846840199084508}
   - component: {fileID: 1999349940242271763}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CylinderBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +155,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f4bbf47b572b97941a530a88bf6ea649, type: 3}
       propertyPath: m_Name
       value: cylinder_dynamic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f4bbf47b572b97941a530a88bf6ea649, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

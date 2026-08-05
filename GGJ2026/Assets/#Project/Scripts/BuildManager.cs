@@ -116,7 +116,7 @@ public class BuildManager : MonoBehaviour
 	void Update()
 	{
 		_mousePos = Mouse.current.position.ReadValue();
-		movementPlane.position = Camera.main.transform.position + Camera.main.transform.forward * 1f;
+		movementPlane.position = Camera.main.transform.position + Camera.main.transform.forward * 10f;
 
 		DoHoverCheck();
 		DoGrabCheck();

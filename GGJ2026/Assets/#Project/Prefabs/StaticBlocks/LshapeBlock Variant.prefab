@@ -56,8 +56,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LshapeBlock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8870033118427837409, guid: 08c83a14be2589e43bdf967bea10f642, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6913741376868889410, guid: 08c83a14be2589e43bdf967bea10f642, type: 3}
+    - {fileID: 687093727279506041, guid: 08c83a14be2589e43bdf967bea10f642, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5932896965595103206, guid: 08c83a14be2589e43bdf967bea10f642, type: 3}
     - {fileID: 3896809374186805197, guid: 08c83a14be2589e43bdf967bea10f642, type: 3}
@@ -126,6 +131,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 27f567a573f42e9498f5e539bb390a4a, type: 3}
       propertyPath: m_Name
       value: Lshape_static
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 27f567a573f42e9498f5e539bb390a4a, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
