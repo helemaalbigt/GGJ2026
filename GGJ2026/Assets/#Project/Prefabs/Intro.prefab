@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7248215306374566006}
+  - component: {fileID: 2892533168902593686}
   m_Layer: 0
   m_Name: Intro
   m_TagString: Untagged
@@ -69,6 +70,23 @@ Transform:
   - {fileID: 7210496383656204907}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2892533168902593686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014213437568002484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83b6d4e73041a418be3c0631d51010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableAfterIntro
+  _disableObjects:
+  - {fileID: 7520074029712701149}
+  - {fileID: 3267504003561947896}
+  - {fileID: 5677744822832106059}
+  - {fileID: 3518207934559981318}
 --- !u!1 &2636207158379577310
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5998384474609172403}
   - component: {fileID: 4610131870817927155}
   - component: {fileID: 4150973649773934325}
+  - component: {fileID: 8272166562055004649}
   m_Layer: 12
   m_Name: circle_dynamic
   m_TagString: Untagged
@@ -113,6 +114,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3993010663554533368, guid: 66291f5e38e1c3340aef4d44e8d22bdb, type: 3}
+--- !u!135 &8272166562055004649
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3535193973621730599}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 12288
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 193
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.0029999998
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6297960995277881368
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +187,10 @@ MonoBehaviour:
   mesh: {fileID: 3535193973621730599}
   renderer: {fileID: 4610131870817927155}
   onCollisionSfx: {fileID: 7229559603748019662}
+  _moveableLinear: 0.05
+  _unmoveableLinear: 10
+  _moveableAngular: 0.005
+  _unmoveableAngular: 10
 --- !u!54 &8252157200485778328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -317,7 +343,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1795333597345847769}

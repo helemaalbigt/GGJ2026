@@ -99,6 +99,10 @@ MonoBehaviour:
   mesh: {fileID: 4610461630379186267}
   renderer: {fileID: 2664822684180707726}
   onCollisionSfx: {fileID: 0}
+  _moveableLinear: 1
+  _unmoveableLinear: 10
+  _moveableAngular: 0.1
+  _unmoveableAngular: 10
 --- !u!1001 &3691491255597720842
 PrefabInstance:
   m_ObjectHideFlags: 0

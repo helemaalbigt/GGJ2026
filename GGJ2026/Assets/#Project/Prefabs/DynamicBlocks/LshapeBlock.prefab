@@ -53,6 +53,10 @@ MonoBehaviour:
   mesh: {fileID: 3896809374186805197}
   renderer: {fileID: 3248435683244553752}
   onCollisionSfx: {fileID: 0}
+  _moveableLinear: 1
+  _unmoveableLinear: 10
+  _moveableAngular: 0.1
+  _unmoveableAngular: 10
 --- !u!54 &687093727279506041
 Rigidbody:
   m_ObjectHideFlags: 0

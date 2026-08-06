@@ -213,6 +213,10 @@ MonoBehaviour:
   mesh: {fileID: 8315549556582711906}
   renderer: {fileID: 2622702873919917940}
   onCollisionSfx: {fileID: 589624446367962101}
+  _moveableLinear: 1
+  _unmoveableLinear: 10
+  _moveableAngular: 0.1
+  _unmoveableAngular: 10
 --- !u!82 &589624446367962101
 AudioSource:
   m_ObjectHideFlags: 0

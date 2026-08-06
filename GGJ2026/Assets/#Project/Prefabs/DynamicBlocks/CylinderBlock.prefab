@@ -79,6 +79,10 @@ MonoBehaviour:
   mesh: {fileID: 639387736832781733}
   renderer: {fileID: 1431990416898985072}
   onCollisionSfx: {fileID: 0}
+  _moveableLinear: 1
+  _unmoveableLinear: 10
+  _moveableAngular: 0.1
+  _unmoveableAngular: 10
 --- !u!65 &1999349940242271763
 BoxCollider:
   m_ObjectHideFlags: 0
