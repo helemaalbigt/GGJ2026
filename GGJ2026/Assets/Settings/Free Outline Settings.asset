@@ -29,7 +29,7 @@ MonoBehaviour:
   blendMode: 0
   extrusionMethod: 6
   scaling: 0
-  width: 0.2
+  width: 2
   minWidth: 0
   scaleWithResolution: 0
   referenceResolution: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   blendMode: 0
   extrusionMethod: 4
   scaling: 0
-  width: 3.6
+  width: 2
   minWidth: 0
   scaleWithResolution: 0
   referenceResolution: 0
