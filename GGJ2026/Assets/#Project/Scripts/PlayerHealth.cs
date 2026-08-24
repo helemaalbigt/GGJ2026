@@ -22,19 +22,33 @@ public class PlayerHealth : MonoBehaviour
 	private void OnEnable()
 	{
 		GameController.BurnTimeUpdated += UpdateHealthBar;
+		GameController.GameStateChanged += HandleEndState;
 	}
+
 	private void OnDisable()
 	{
 		GameController.BurnTimeUpdated -= UpdateHealthBar;
+		GameController.GameStateChanged -= HandleEndState;
+	}
+
+	#endregion
+
+	#region Methods
+	private void HandleEndState(object sender, GameController.GameState e)
+	{
+		if (e != GameController.GameState.EndGame) return;
+
+		gameObject.SetActive(false);
 	}
 
 	private void UpdateHealthBar(object sender, float e)
 	{
 		_image.fillAmount = 1 - e;
-	}
-	#endregion
 
-	#region Methods
+		var active = 1 - _image.fillAmount > float.Epsilon;
+		_image.transform.parent.gameObject.SetActive(active);
+	}
+
 	#endregion
 }
 

@@ -21,8 +21,8 @@ public class EndGameTrigger : MonoBehaviour
 		if (other.isTrigger) return;
 		if (other.gameObject.layer != Layers.Player) return;
 
-        // get the game manager
-        var gameController = FindFirstObjectByType<GameController>();
+		// get the game manager
+		var gameController = FindFirstObjectByType<GameController>();
 		gameController.SetGameState(GameController.GameState.EndGame);
 
 		_animator.enabled = true;
@@ -32,17 +32,17 @@ public class EndGameTrigger : MonoBehaviour
 			playerMovement.MoveTo(transform.position + _targetPositionOffset);
 		}
 
-        Invoke("StartSunOutro", 5);
-    }
-    #endregion
+		Invoke(nameof(StartSunOutro), 5);
+	}
+	#endregion
 
-    #region Methods
-    void StartSunOutro()
-    {
-        // get the sun Controller
-        var sunController = FindFirstObjectByType<SunController>();
+	#region Methods
+	void StartSunOutro()
+	{
+		// get the sun Controller
+		var sunController = FindFirstObjectByType<SunController>();
 		sunController.StartOutro();
-    }
-    #endregion
+	}
+	#endregion
 }
 

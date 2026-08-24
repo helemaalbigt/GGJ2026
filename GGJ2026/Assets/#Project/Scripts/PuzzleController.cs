@@ -80,8 +80,7 @@ public class PuzzleController : MonoBehaviour
 		foreach (var grabbable in _grabbableObjects)
 		{
 			grabbable.rigidBody.useGravity = gravityOn;
-			grabbable.rigidBody.linearDamping = gravityOn ? 1f : 10f;
-			grabbable.rigidBody.angularDamping = gravityOn ? 0.1f : 10f;
+			grabbable.SetMoveable(gravityOn);
 			if (gravityOn)
 			{
 				grabbable.rigidBody.constraints = RigidbodyConstraints.None;

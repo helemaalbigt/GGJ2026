@@ -20,6 +20,7 @@ public class SetPlayerSeeThroughEffect : MonoBehaviour
 	private void OnEnable()
 	{
 		GameController.GameStateChanged += ListenToGameState;
+		ListenToGameState(this, GameController.CurrentGameState);
 	}
 	private void OnDisable()
 	{

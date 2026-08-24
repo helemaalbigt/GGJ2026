@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 241183423971695922}
   - component: {fileID: 2751614474811645899}
   - component: {fileID: 305563612441017284}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FlatBlock (Transparent)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.015, z: 0.12}
+  m_Size: {x: 0.3, y: 0.15, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2751614474811645899
 Rigidbody:
@@ -98,6 +98,11 @@ MonoBehaviour:
   rigidBody: {fileID: 2751614474811645899}
   mesh: {fileID: 4610461630379186267}
   renderer: {fileID: 2664822684180707726}
+  onCollisionSfx: {fileID: 0}
+  _moveableLinear: 1
+  _unmoveableLinear: 10
+  _moveableAngular: 0.1
+  _unmoveableAngular: 10
 --- !u!1001 &3691491255597720842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +158,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 92cf7854731fc2745a026359d987df85, type: 3}
       propertyPath: m_Name
       value: beam_dynamic
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 92cf7854731fc2745a026359d987df85, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

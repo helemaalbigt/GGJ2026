@@ -335,6 +335,7 @@ MonoBehaviour:
   inputHelper: {fileID: 3829065851925145509}
   grabHelper: {fileID: 7978986149532648691}
   moveHelper: {fileID: 583300950905151491}
+  raycastDistance: 100
   _hoveredBlock: {fileID: 0}
   _grabbedBlock: {fileID: 0}
   _groundCursor: {fileID: 3798563438812171819}
@@ -549,8 +550,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5000007, y: -0.4999993, z: -0.4999993, w: 0.5000007}
   m_LocalPosition: {x: 0.0042, y: 0.0398, z: 0.0071}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7737407553039194459}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
@@ -641,8 +642,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.7071079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7737407553039194459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -1459,7 +1460,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.0015, y: 1, z: 0.0015}
+  m_LocalScale: {x: 0.015000001, y: 1, z: 0.015000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9097098721067834081}
