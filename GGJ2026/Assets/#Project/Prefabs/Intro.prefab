@@ -436,8 +436,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SunController
   sun: {fileID: 0}
   startPosition: {fileID: 3414221689411188723}
-  endPosition: {fileID: 2588613882437359421}
+  playPosition: {fileID: 2588613882437359421}
+  endPosition: {fileID: 3414221689411188723}
   startColor: {r: 0, g: 0.061501026, b: 1, a: 0}
+  playColor: {r: 0, g: 0.061501026, b: 1, a: 0}
   endColor: {r: 0.9245283, g: 0.9190682, b: 0.70066446, a: 1}
   gradient:
     serializedVersion: 2
